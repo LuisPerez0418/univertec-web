@@ -6,11 +6,11 @@ const Inicio = () => {
     <div className="w-full">
       {/* Sección 1: Hero Banner "Encapsulado" */}
       <section className="container mx-auto px-4 mt-8">
-        <div className="bg-institucional-dark rounded-[2rem] p-10 md:p-16 shadow-2xl border border-white/10 relative overflow-hidden">
+        <div className="bg-institucional-dark rounded-[2rem] p-6 sm:p-10 md:p-16 shadow-2xl border border-white/10 relative overflow-hidden">
           {/* Luz decorativa suave de fondo */}
           <div className="absolute -right-20 -top-20 w-80 h-80 bg-institucional-yellow/10 rounded-full blur-3xl pointer-events-none"></div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center relative z-10">
             {/* Izquierda: Textos y Botones */}
             <div className="flex flex-col items-start text-left">
               <h1 className="text-4xl md:text-6xl font-extrabold text-institucional-yellow leading-tight tracking-tight">
@@ -37,13 +37,12 @@ const Inicio = () => {
               </div>
             </div>
 
-            {/* Derecha: Imagen Principal */}
-            <div className="flex justify-center items-center py-4">
-              <div className="relative w-full max-w-md lg:max-w-lg">
+            <div className="flex justify-center items-center py-2 sm:py-4 w-full">
+              <div className="w-full flex justify-center items-center bg-institucional-dark overflow-hidden">
                 <img
                   src="/imagen_2.jpg"
                   alt="Estudiantes UNIVERTEC"
-                  className="w-full h-auto object-contain md:h-96 md:object-cover rounded-xl shadow-2xl transform md:-rotate-2 hover:rotate-0 transition-transform duration-300 border border-white/20"
+                  className="w-full h-auto max-h-[40vh] md:max-h-[75vh] object-contain object-center"
                 />
               </div>
             </div>
