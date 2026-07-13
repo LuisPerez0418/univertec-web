@@ -1,12 +1,40 @@
 import React, { useState } from 'react';
 
 const Contacto = () => {
-  const [enviado, setEnviado] = useState(false);
+  const [result, setResult] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setEnviado(true);
-    setTimeout(() => setEnviado(false), 5000);
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setIsSubmitting(true);
+    setResult('Enviando mensaje...');
+
+    const formData = new FormData(event.target);
+    formData.append('access_key', '8b6ce905-8e8d-4565-b4cd-2173383161bc');
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setResult(
+          '¡Mensaje enviado correctamente! Nos pondremos en contacto pronto.'
+        );
+        event.target.reset();
+      } else {
+        console.log('Error', data);
+        setResult(data.message || 'Ocurrió un error al enviar el mensaje.');
+      }
+    } catch (error) {
+      console.error('Error de red', error);
+      setResult('Ocurrió un error de red. Por favor, intenta de nuevo.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -187,26 +215,7 @@ const Contacto = () => {
               Envíanos un Mensaje
             </h2>
 
-            {enviado && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg text-sm sm:text-base flex items-center gap-3">
-                <svg
-                  className="w-5 h-5 text-green-600 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span>¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={onSubmit} className="space-y-6">
               {/* Nombre Completo */}
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -214,6 +223,7 @@ const Contacto = () => {
                 </label>
                 <input
                   type="text"
+                  name="nombre"
                   required
                   placeholder="Ej: Juan Pérez"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400"
@@ -227,6 +237,7 @@ const Contacto = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   required
                   placeholder="Ej: juan.perez@correo.com"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400"
@@ -240,6 +251,7 @@ const Contacto = () => {
                 </label>
                 <input
                   type="tel"
+                  name="telefono"
                   required
                   placeholder="Ej: +57 301 1028224"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400"
@@ -252,6 +264,7 @@ const Contacto = () => {
                   Programa de Interés
                 </label>
                 <select
+                  name="programa"
                   required
                   defaultValue=""
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 bg-white"
@@ -275,6 +288,7 @@ const Contacto = () => {
                   Mensaje
                 </label>
                 <textarea
+                  name="mensaje"
                   rows={4}
                   required
                   placeholder="Escribe tu mensaje o inquietud aquí..."
@@ -285,24 +299,36 @@ const Contacto = () => {
               {/* Botón de Enviar */}
               <button
                 type="submit"
-                className="bg-institucional-yellow text-institucional-dark font-bold w-full py-3 px-6 rounded-lg hover:bg-yellow-500 transition-colors shadow-sm hover:shadow flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className={`bg-institucional-yellow text-institucional-dark font-bold w-full py-3 px-6 rounded-lg hover:bg-yellow-500 transition-colors shadow-sm hover:shadow flex items-center justify-center gap-2 ${
+                  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
-                <span>Enviar Mensaje</span>
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
+                <span>{isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}</span>
+                {!isSubmitting && (
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                )}
               </button>
+
+              {/* Estado de resultado */}
+              {result && (
+                <div className="text-center font-semibold mt-4 text-institucional-dark">
+                  {result}
+                </div>
+              )}
             </form>
           </div>
         </div>

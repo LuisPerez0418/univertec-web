@@ -43,7 +43,7 @@ const Inicio = () => {
                 <img
                   src="/imagen_2.jpg"
                   alt="Estudiantes UNIVERTEC"
-                  className="w-full h-80 md:h-96 object-cover rounded-xl shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-300 border border-white/20"
+                  className="w-full h-auto object-contain md:h-96 md:object-cover rounded-xl shadow-2xl transform md:-rotate-2 hover:rotate-0 transition-transform duration-300 border border-white/20"
                 />
               </div>
             </div>
