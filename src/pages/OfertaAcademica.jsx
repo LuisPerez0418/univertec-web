@@ -9,7 +9,7 @@ const OfertaAcademica = () => {
         'Orientadores en la circulación vehicular y peatonal contribuyendo a la organización del sistema vial.',
       icono: (
         <svg
-          className="w-8 h-8 text-institucional-dark"
+          className="w-8 h-8 text-institucional-verde"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ const OfertaAcademica = () => {
         'Construcción de una sociedad justa y equilibrada, con sólidos componentes humanísticos y desarrollo sostenible.',
       icono: (
         <svg
-          className="w-8 h-8 text-institucional-dark"
+          className="w-8 h-8 text-institucional-verde"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -59,7 +59,7 @@ const OfertaAcademica = () => {
         'Herramientas necesarias para el desarrollo emocional, cognitivo y psicológico de niños y niñas.',
       icono: (
         <svg
-          className="w-8 h-8 text-institucional-dark"
+          className="w-8 h-8 text-institucional-verde"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -114,13 +114,13 @@ const OfertaAcademica = () => {
     <div className="w-full py-12">
       {/* Encabezado de página (Hero pequeño) */}
       <section className="container mx-auto px-4 mb-16">
-        <div className="bg-institucional-dark rounded-3xl p-8 md:p-14 text-white shadow-2xl border border-white/10 relative overflow-hidden">
+        <div className="bg-institucional-verde rounded-3xl p-8 md:p-14 text-white shadow-2xl border border-white/10 relative overflow-hidden">
           {/* Elementos decorativos de fondo */}
-          <div className="absolute -right-16 -top-16 w-64 h-64 bg-institucional-yellow/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -right-16 -top-16 w-64 h-64 bg-institucional-amarillo/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute left-1/3 -bottom-16 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl">
-            <span className="inline-block bg-institucional-yellow/20 text-institucional-yellow text-xs font-bold tracking-wider uppercase px-3.5 py-1.5 rounded-full mb-4 border border-institucional-yellow/30">
+            <span className="inline-block bg-institucional-amarillo/20 text-institucional-amarillo text-xs font-bold tracking-wider uppercase px-3.5 py-1.5 rounded-full mb-4 border border-institucional-amarillo/30">
               Portafolio Educativo
             </span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
@@ -136,7 +136,7 @@ const OfertaAcademica = () => {
       {/* Sección 1: Programas Técnicos Laborales */}
       <section className="container mx-auto px-4 mb-20">
         <div className="mb-8 text-left">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-institucional-dark tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-institucional-verde tracking-tight">
             Programas Técnicos Laborales
           </h2>
           <p className="text-gray-600 mt-2 text-base">
@@ -151,20 +151,20 @@ const OfertaAcademica = () => {
               className="bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group hover:-translate-y-1"
             >
               {/* Pequeño banner superior */}
-              <div className="bg-institucional-yellow px-5 py-2 flex items-center justify-between">
-                <span className="text-institucional-dark font-bold text-xs uppercase tracking-wider">
+              <div className="bg-institucional-amarillo px-5 py-2 flex items-center justify-between">
+                <span className="text-institucional-verde font-bold text-xs uppercase tracking-wider">
                   Técnico Laboral
                 </span>
-                <span className="w-2 h-2 rounded-full bg-institucional-dark/40 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-institucional-verde/40 animate-pulse" />
               </div>
 
               {/* Contenido de la tarjeta */}
               <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="w-14 h-14 rounded-xl bg-institucional-yellow/15 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-14 h-14 rounded-xl bg-institucional-amarillo/15 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     {progr.icono}
                   </div>
-                  <h3 className="text-xl font-bold text-institucional-dark mb-3 leading-snug group-hover:text-institucional-light transition-colors">
+                  <h3 className="text-xl font-bold text-institucional-verde mb-3 leading-snug group-hover:text-institucional-verdeClaro transition-colors">
                     {progr.titulo}
                   </h3>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
@@ -176,10 +176,10 @@ const OfertaAcademica = () => {
                   <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                     Presencial / Semipresencial
                   </span>
-                  <div className="text-institucional-dark font-bold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  <div className="text-institucional-verde font-bold text-sm flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                     <span>Ver más</span>
                     <svg
-                      className="w-4 h-4 text-institucional-yellow"
+                      className="w-4 h-4 text-institucional-amarillo"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -198,10 +198,10 @@ const OfertaAcademica = () => {
       <section className="container mx-auto px-4 mb-20">
         <div className="bg-gray-50 rounded-3xl p-6 sm:p-8 md:p-12 border border-gray-200/70 shadow-sm">
           <div className="mb-8">
-            <span className="text-xs font-bold uppercase tracking-wider text-institucional-dark/60 bg-white px-3 py-1 rounded-full border border-gray-200 inline-block mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-institucional-verde/60 bg-white px-3 py-1 rounded-full border border-gray-200 inline-block mb-3">
               Actualización Profesional
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-institucional-dark tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-institucional-verde tracking-tight">
               Diplomados
             </h2>
             <p className="text-gray-600 mt-2 text-base">
@@ -216,7 +216,7 @@ const OfertaAcademica = () => {
                 className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200/80 flex flex-col sm:flex-row items-start gap-4 group"
               >
                 {/* Ícono a la izquierda */}
-                <div className="w-12 h-12 shrink-0 rounded-xl bg-institucional-dark text-institucional-yellow flex items-center justify-center group-hover:bg-institucional-yellow group-hover:text-institucional-dark transition-colors duration-300">
+                <div className="w-12 h-12 shrink-0 rounded-xl bg-institucional-verde text-institucional-amarillo flex items-center justify-center group-hover:bg-institucional-amarillo group-hover:text-institucional-verde transition-colors duration-300">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -241,7 +241,7 @@ const OfertaAcademica = () => {
 
                 {/* Contenido a la derecha */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-bold text-institucional-dark mb-3 leading-snug group-hover:text-institucional-light transition-colors">
+                  <h3 className="text-lg font-bold text-institucional-verde mb-3 leading-snug group-hover:text-institucional-verdeClaro transition-colors">
                     {dip.titulo}
                   </h3>
 
@@ -280,7 +280,7 @@ const OfertaAcademica = () => {
       {/* Sección 3: Cursos Cortos y Capacitación */}
       <section className="container mx-auto px-4">
         <div className="mb-8">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-institucional-dark tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-institucional-verde tracking-tight">
             Cursos Cortos y Capacitación
           </h2>
           <p className="text-gray-600 mt-2 text-base">
@@ -292,10 +292,10 @@ const OfertaAcademica = () => {
           {cursosCortos.map((curso, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-r-xl border border-gray-100 border-l-4 border-l-institucional-yellow shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group hover:translate-x-1"
+              className="bg-white p-6 rounded-r-xl border border-gray-100 border-l-4 border-l-institucional-amarillo shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-between group hover:translate-x-1"
             >
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-institucional-dark group-hover:bg-institucional-yellow/20 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-institucional-verde group-hover:bg-institucional-amarillo/20 transition-colors">
                   <svg
                     className="w-5 h-5"
                     fill="none"
@@ -311,13 +311,13 @@ const OfertaAcademica = () => {
                     />
                   </svg>
                 </div>
-                <h3 className="font-bold text-gray-800 text-base sm:text-lg group-hover:text-institucional-dark transition-colors">
+                <h3 className="font-bold text-gray-800 text-base sm:text-lg group-hover:text-institucional-verde transition-colors">
                   {curso}
                 </h3>
               </div>
 
               <svg
-                className="w-5 h-5 text-gray-300 group-hover:text-institucional-dark transition-colors shrink-0"
+                className="w-5 h-5 text-gray-300 group-hover:text-institucional-verde transition-colors shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

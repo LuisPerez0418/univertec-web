@@ -13,7 +13,7 @@ const Transparencia = () => {
       id: 2,
       titulo: 'Licencia de Funcionamiento',
       descripcion:
-        'Resolución No. 973 del 10 de agosto de 2022, expedida por la Secretaría de Educación de Malambo.',
+        'Resolución No. 973 del 10 de agosto de 2022, expedida por la Secretaría de Educación municipal.',
       enlace: '/licencia-funcionamiento.pdf',
     },
     {
@@ -35,9 +35,9 @@ const Transparencia = () => {
   return (
     <div className="w-full">
       {/* 1. Cabecera (Header de la página) */}
-      <section className="bg-institucional-dark text-white py-16">
+      <section className="bg-institucional-verde text-white py-16">
         <div className="container mx-auto px-6 text-center max-w-4xl">
-          <h1 className="text-4xl font-bold text-institucional-yellow mb-4">
+          <h1 className="text-4xl font-bold text-institucional-amarillo mb-4">
             Transparencia y Legalidad
           </h1>
           <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
@@ -53,10 +53,10 @@ const Transparencia = () => {
             {documentos.map((doc) => (
               <div
                 key={doc.id}
-                className="bg-white rounded-xl shadow-md p-8 border-l-4 border-institucional-yellow hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 group"
+                className="bg-white rounded-xl shadow-md p-8 border-l-4 border-institucional-amarillo hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 group"
               >
                 {/* Ícono SVG del documento */}
-                <div className="w-14 h-14 shrink-0 rounded-xl bg-institucional-dark/5 flex items-center justify-center text-institucional-dark group-hover:bg-institucional-yellow/20 transition-colors duration-300">
+                <div className="w-14 h-14 shrink-0 rounded-xl bg-institucional-verde/5 flex items-center justify-center text-institucional-verde group-hover:bg-institucional-amarillo/20 transition-colors duration-300">
                   <svg
                     className="w-8 h-8"
                     fill="none"
@@ -76,7 +76,7 @@ const Transparencia = () => {
                 {/* Información y botón de descarga */}
                 <div className="flex-1 flex flex-col justify-between h-full">
                   <div>
-                    <h2 className="text-xl font-bold text-institucional-dark group-hover:text-institucional-light transition-colors">
+                    <h2 className="text-xl font-bold text-institucional-verde group-hover:text-institucional-verdeClaro transition-colors">
                       {doc.titulo}
                     </h2>
                     <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-2">
@@ -88,7 +88,7 @@ const Transparencia = () => {
                     <a
                       href={doc.enlace}
                       download
-                      className="bg-institucional-yellow text-institucional-dark px-4 py-2 rounded font-semibold inline-flex items-center gap-2 mt-4 hover:bg-yellow-500 transition-colors shadow-sm hover:shadow"
+                      className="bg-institucional-amarillo text-institucional-verde px-4 py-2 rounded font-semibold inline-flex items-center gap-2 mt-4 hover:bg-yellow-500 transition-colors shadow-sm hover:shadow"
                     >
                       <span>Descargar PDF</span>
                       <svg

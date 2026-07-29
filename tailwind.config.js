@@ -8,9 +8,10 @@ export default {
     extend: {
       colors: {
         institucional: {
-          dark: '#0b1b1e',   
-          light: '#132c30',  
-          yellow: '#facc15', 
+          verde: '#096266',
+          verdeClaro: '#0c8a8f',
+          amarillo: '#F4C430',
+          azul: '#096266',
         }
       },
       fontFamily: {

@@ -40,13 +40,13 @@ const Contacto = () => {
   return (
     <div className="w-full">
       {/* Sección 1: Cabecera (Hero Pequeño) */}
-      <section className="bg-institucional-dark text-white py-16">
+      <section className="bg-institucional-verde text-white py-16">
         <div className="container mx-auto px-6 text-center max-w-4xl">
-          <h1 className="text-4xl font-bold text-institucional-yellow mb-4">
+          <h1 className="text-4xl font-bold text-institucional-amarillo mb-4">
             Contáctanos
           </h1>
           <p className="text-gray-200 text-base sm:text-lg leading-relaxed">
-            Estamos aquí para resolver tus dudas y guiarte en tu proceso de formación técnica. Escríbenos o visítanos en nuestras sedes.
+            Estamos aquí para resolver tus dudas y guiarte en tu proceso de formación técnica. Escríbenos directamente y nos pondremos en contacto contigo.
           </p>
         </div>
       </section>
@@ -54,78 +54,16 @@ const Contacto = () => {
       {/* Sección 2: Contenedor Principal (Grid de 2 columnas) */}
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Columna Izquierda: Información y Sedes */}
+          {/* Columna Izquierda: Información de Contacto (Sin direcciones físicas) */}
           <div className="bg-white p-8 rounded-xl shadow-md h-fit">
-            <h2 className="text-2xl font-bold text-institucional-dark mb-6">
+            <h2 className="text-2xl font-bold text-institucional-verde mb-6">
               Información de Contacto
             </h2>
 
             <div className="space-y-6">
-              {/* Sede Administrativa */}
+              {/* Celular */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-institucional-dark/5 text-institucional-dark flex items-center justify-center shrink-0">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.8}
-                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-800 text-base sm:text-lg">
-                    Sede Administrativa
-                  </h3>
-                  <p className="text-gray-600 text-sm sm:text-base mt-1">
-                    Calle 12 No. 26B-51, barrio El Concord, Malambo (segundo piso).
-                  </p>
-                </div>
-              </div>
-
-              {/* Sede Educativa */}
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-institucional-dark/5 text-institucional-dark flex items-center justify-center shrink-0">
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.8}
-                      d="M12 14l9-5-9-5-9 5 9 5z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.8}
-                      d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-bold text-gray-800 text-base sm:text-lg">
-                    Sede Educativa
-                  </h3>
-                  <p className="text-gray-600 text-sm sm:text-base mt-1">
-                    Carrera 1C No. 12-37, barrio El Carmen, Malambo.
-                  </p>
-                </div>
-              </div>
-
-              {/* Teléfono / WhatsApp */}
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-institucional-dark/5 text-institucional-dark flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-institucional-verde/5 text-institucional-verde flex items-center justify-center shrink-0">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -143,7 +81,7 @@ const Contacto = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-800 text-base sm:text-lg">
-                    Teléfono / WhatsApp
+                    Celular
                   </h3>
                   <p className="text-gray-600 text-sm sm:text-base mt-1">
                     +57 301 1028224
@@ -153,7 +91,7 @@ const Contacto = () => {
 
               {/* Correos Electrónicos */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-institucional-dark/5 text-institucional-dark flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-institucional-verde/5 text-institucional-verde flex items-center justify-center shrink-0">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -174,14 +112,14 @@ const Contacto = () => {
                     Correos Electrónicos
                   </h3>
                   <p className="text-gray-600 text-sm sm:text-base mt-1">
-                    info@univertec.com / univertecbq@gmail.com
+                    Univertecbq@gmail.com
                   </p>
                 </div>
               </div>
 
               {/* Horario de Atención */}
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-institucional-dark/5 text-institucional-dark flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-institucional-verde/5 text-institucional-verde flex items-center justify-center shrink-0">
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -209,9 +147,9 @@ const Contacto = () => {
             </div>
           </div>
 
-          {/* Columna Derecha: Formulario de Contacto */}
+          {/* Columna Derecha: Formulario de Contacto (Lógica y campos 100% intactos) */}
           <div className="bg-white p-8 rounded-xl shadow-md">
-            <h2 className="text-2xl font-bold text-institucional-dark mb-6">
+            <h2 className="text-2xl font-bold text-institucional-verde mb-6">
               Envíanos un Mensaje
             </h2>
 
@@ -226,7 +164,7 @@ const Contacto = () => {
                   name="nombre"
                   required
                   placeholder="Ej: Juan Pérez"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400"
                 />
               </div>
 
@@ -240,7 +178,7 @@ const Contacto = () => {
                   name="email"
                   required
                   placeholder="Ej: juan.perez@correo.com"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400"
                 />
               </div>
 
@@ -254,7 +192,7 @@ const Contacto = () => {
                   name="telefono"
                   required
                   placeholder="Ej: +57 301 1028224"
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400"
                 />
               </div>
 
@@ -267,7 +205,7 @@ const Contacto = () => {
                   name="programa"
                   required
                   defaultValue=""
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 bg-white"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 bg-white"
                 >
                   <option value="" disabled>
                     Selecciona un programa...
@@ -292,7 +230,7 @@ const Contacto = () => {
                   rows={4}
                   required
                   placeholder="Escribe tu mensaje o inquietud aquí..."
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-yellow focus:border-institucional-yellow transition-colors text-gray-800 placeholder-gray-400 resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400 resize-none"
                 />
               </div>
 
@@ -300,7 +238,7 @@ const Contacto = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`bg-institucional-yellow text-institucional-dark font-bold w-full py-3 px-6 rounded-lg hover:bg-yellow-500 transition-colors shadow-sm hover:shadow flex items-center justify-center gap-2 ${
+                className={`bg-institucional-amarillo text-institucional-verde font-bold w-full py-3 px-6 rounded-lg hover:bg-yellow-500 transition-colors shadow-sm hover:shadow flex items-center justify-center gap-2 ${
                   isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
@@ -325,7 +263,7 @@ const Contacto = () => {
 
               {/* Estado de resultado */}
               {result && (
-                <div className="text-center font-semibold mt-4 text-institucional-dark">
+                <div className="text-center font-semibold mt-4 text-institucional-verde">
                   {result}
                 </div>
               )}

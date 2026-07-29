@@ -4,7 +4,7 @@ import logo from '../assets/logo.webp';
 
 const Footer = () => {
   return (
-    <footer className="bg-institucional-dark text-gray-300 py-12 px-4 sm:px-8 border-t border-institucional-light/40">
+    <footer className="bg-institucional-verde text-gray-300 py-12 px-4 sm:px-8 border-t border-institucional-verdeClaro/40">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Columna 1: Identidad Institucional */}
         <div className="flex flex-col items-start">
@@ -20,7 +20,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Columna 2: Sedes y Contacto */}
+        {/* Columna 2: Contacto */}
         <div>
           <h3 className="font-semibold text-white text-lg mb-4 tracking-wide">
             Contacto
@@ -29,7 +29,7 @@ const Footer = () => {
             {/* WhatsApp */}
             <li className="flex items-center space-x-2.5">
               <svg
-                className="w-5 h-5 fill-current text-institucional-yellow shrink-0"
+                className="w-5 h-5 fill-current text-institucional-amarillo shrink-0"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
               >
@@ -41,7 +41,7 @@ const Footer = () => {
                   href="https://wa.me/573011028224"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-institucional-yellow transition-colors"
+                  className="hover:text-institucional-amarillo transition-colors"
                 >
                   +57 301 1028224
                 </a>
@@ -51,7 +51,7 @@ const Footer = () => {
             {/* Horario */}
             <li className="flex items-center space-x-2.5">
               <svg
-                className="w-5 h-5 text-institucional-yellow shrink-0"
+                className="w-5 h-5 text-institucional-amarillo shrink-0"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -80,36 +80,36 @@ const Footer = () => {
             <li>
               <Link
                 to="/transparencia"
-                className="hover:text-institucional-yellow transition-colors duration-200 inline-flex items-center space-x-1.5"
+                className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
               >
-                <span className="text-institucional-yellow text-xs">▸</span>
+                <span className="text-institucional-amarillo text-xs">▸</span>
                 <span>Transparencia y Legalidad</span>
               </Link>
             </li>
             <li>
               <a
                 href="#"
-                className="hover:text-institucional-yellow transition-colors duration-200 inline-flex items-center space-x-1.5"
+                className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
               >
-                <span className="text-institucional-yellow text-xs">▸</span>
+                <span className="text-institucional-amarillo text-xs">▸</span>
                 <span>PQRS</span>
               </a>
             </li>
             <li>
               <a
                 href="#"
-                className="hover:text-institucional-yellow transition-colors duration-200 inline-flex items-center space-x-1.5"
+                className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
               >
-                <span className="text-institucional-yellow text-xs">▸</span>
+                <span className="text-institucional-amarillo text-xs">▸</span>
                 <span>Consulta SIET</span>
               </a>
             </li>
             <li>
               <a
                 href="#"
-                className="hover:text-institucional-yellow transition-colors duration-200 inline-flex items-center space-x-1.5"
+                className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
               >
-                <span className="text-institucional-yellow text-xs">▸</span>
+                <span className="text-institucional-amarillo text-xs">▸</span>
                 <span>Plataforma Q10</span>
               </a>
             </li>
