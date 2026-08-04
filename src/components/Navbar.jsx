@@ -44,7 +44,7 @@ const Navbar = () => {
             </Link>
             <span className="opacity-40 text-white">|</span>
             <a
-              href="[INSERTA_AQUI_EL_LINK_DEL_SIET]"
+              href="https://siet.mineducacion.gov.co/siet/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:underline transition-all"

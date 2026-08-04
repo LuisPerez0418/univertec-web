@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/logo.webp';
 import conocimientosAcademicos from '../assets/conocimientos-academicos.png';
 import banner from '../assets/banner.jpg';
+import evento1 from '../assets/evento1.jpeg';
+import evento2 from '../assets/evento2.jpeg';
+import evento3 from '../assets/evento3.jpeg';
+import evento4 from '../assets/evento4.jpeg';
+import alcaldiaB from '../assets/alcaldiaBLogo.png';
+import fundacionN from '../assets/fundacionNLogo.png';
+import gobernacionA from '../assets/gobernacionALogo.webp';
 
 const Inicio = () => {
   // Arreglo de diapositivas en el orden estrictamente especificado
@@ -34,36 +41,32 @@ const Inicio = () => {
       titulo: 'Prácticas Pedagógicas',
       descripcion:
         'Nuestros estudiantes de Primera Infancia aplicando metodologías lúdicas en centros de desarrollo infantil.',
+      imagen: evento1,
     },
     {
       id: '002',
       titulo: 'Jornadas de Saneamiento',
       descripcion:
         'Campañas de concientización, recolección de residuos y cuidado del medio ambiente lideradas por el área ambiental.',
+      imagen: evento2,
     },
     {
       id: '003',
       titulo: 'Talleres de Liderazgo',
       descripcion:
         'Fortalecimiento de habilidades blandas, trabajo en equipo y resolución de conflictos para el ámbito laboral.',
+      imagen: evento3,
     },
     {
       id: '004',
       titulo: 'Intervención Comunitaria',
       descripcion:
         'Proyectos de impacto social y apoyo integral dirigidos a poblaciones vulnerables de la región.',
+      imagen: evento4,
     },
   ];
 
-  // Array de placeholders para el portafolio de empresas / aliados
-  const aliadosPlaceholders = [
-    'Logo Aliado 1',
-    'Logo Aliado 2',
-    'Logo Aliado 3',
-    'Logo Aliado 4',
-    'Logo Aliado 5',
-    'Logo Aliado 6',
-  ];
+
 
   return (
     <div className="w-full">
@@ -214,7 +217,7 @@ const Inicio = () => {
           </a>
 
           {/* Ítem 3: Consulta SIET */}
-          <a href="#siet" className="flex flex-col items-center group cursor-pointer w-32">
+          <a href="https://siet.mineducacion.gov.co/siet/" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center group cursor-pointer w-32">
             <div className="w-24 h-24 rounded-full bg-white shadow-lg flex items-center justify-center border-b-4 border-institucional-verdeClaro hover:-translate-y-2 transition-transform text-institucional-verde group-hover:text-institucional-verdeClaro">
               <svg className="w-10 h-10 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -256,21 +259,12 @@ const Inicio = () => {
         {/* Grid responsivo de actividades */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {actividades.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-lg border border-gray-200/80 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col group overflow-hidden"
-            >
-              <div className="bg-gray-200 h-48 w-full rounded-t-lg flex items-center justify-center text-gray-400 font-medium">
-                Foto de Actividad
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-institucional-azul font-bold text-lg mb-2 group-hover:text-institucional-verde transition-colors">
-                  {item.titulo}
-                </h3>
-                <p className="text-gray-600 text-sm sm:text-base leading-relaxed flex-grow">
-                  {item.descripcion}
-                </p>
-              </div>
+            <div key={item.id} className="relative group">
+              <img
+                src={item.imagen}
+                alt={item.titulo}
+                className="w-full h-64 md:h-72 object-cover rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+              />
             </div>
           ))}
         </div>
@@ -289,26 +283,11 @@ const Inicio = () => {
             </p>
           </div>
 
-          {/* Grid responsivo de logos aliados */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
-            {aliadosPlaceholders.map((placeholder, idx) => (
-              <div
-                key={idx}
-                className="bg-gray-200 rounded-xl h-24 flex flex-col items-center justify-center border border-gray-300/60 hover:bg-gray-300/70 hover:border-institucional-verdeClaro/50 transition-all cursor-pointer group p-4 shadow-inner"
-              >
-                <svg
-                  className="w-6 h-6 text-gray-400 group-hover:text-institucional-verde transition-colors mb-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
-                <span className="text-gray-500 font-bold text-xs sm:text-sm group-hover:text-institucional-verde transition-colors text-center select-none">
-                  {placeholder}
-                </span>
-              </div>
-            ))}
+          {/* Logos Aliados */}
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 mt-8">
+            <img src={alcaldiaB} alt="Alcaldía de Barranquilla" className="h-20 md:h-28 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 ease-in-out hover:scale-105" />
+            <img src={fundacionN} alt="Fundación Nueva Ciudad" className="h-24 md:h-32 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 ease-in-out hover:scale-105 bg-institucional-verde p-3 md:p-4 rounded-2xl shadow-md" />
+            <img src={gobernacionA} alt="Gobernación del Atlántico" className="h-20 md:h-28 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 ease-in-out hover:scale-105" />
           </div>
         </div>
       </section>

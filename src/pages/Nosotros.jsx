@@ -21,15 +21,7 @@ const Nosotros = () => {
     },
   ];
 
-  // Configuración de placeholders para la Galería asimétrica / Masonry
-  const galeriaPlaceholders = [
-    { id: 1, colSpan: 'md:col-span-2', minHeight: 'min-h-[280px]' },
-    { id: 2, colSpan: 'md:col-span-1', minHeight: 'min-h-[280px]' },
-    { id: 3, colSpan: 'md:col-span-1', minHeight: 'min-h-[250px]' },
-    { id: 4, colSpan: 'md:col-span-1', minHeight: 'min-h-[250px]' },
-    { id: 5, colSpan: 'md:col-span-1', minHeight: 'min-h-[250px]' },
-    { id: 6, colSpan: 'md:col-span-3', minHeight: 'min-h-[300px]' },
-  ];
+
 
   return (
     <div className="w-full">
@@ -120,58 +112,7 @@ const Nosotros = () => {
         </div>
       </section>
 
-      {/* Sección 4: Galería de la Comunidad (Grid asimétrico / Masonry) */}
-      <section className="bg-white py-16">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="inline-block bg-institucional-verde/10 text-institucional-verde text-xs font-bold tracking-wider uppercase px-3.5 py-1.5 rounded-full mb-3 border border-institucional-verde/20">
-              Vida Universitaria
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-institucional-verde">
-              Nuestra Comunidad
-            </h2>
-            <div className="w-16 h-1.5 bg-institucional-amarillo mx-auto rounded-full mt-3"></div>
-            <p className="text-gray-600 mt-4 text-base sm:text-lg">
-              Momentos, aprendizajes e impacto social en nuestras aulas y talleres prácticos.
-            </p>
-          </div>
 
-          {/* Grid de Placeholders de Fotos */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {galeriaPlaceholders.map((item) => (
-              <div
-                key={item.id}
-                className={`bg-gray-200 rounded-xl ${item.colSpan} ${item.minHeight} border border-gray-300/60 shadow-sm flex flex-col items-center justify-center p-6 hover:scale-[1.02] hover:shadow-xl hover:border-institucional-verdeClaro/50 transition-all duration-300 cursor-pointer group relative overflow-hidden`}
-              >
-                {/* Ícono de foto/imagen */}
-                <div className="w-16 h-16 rounded-full bg-white/70 flex items-center justify-center text-gray-400 group-hover:text-institucional-verde group-hover:bg-white transition-colors duration-300 shadow-sm mb-3">
-                  <svg
-                    className="w-8 h-8"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.8}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-
-                <span className="font-bold text-gray-500 text-base sm:text-lg group-hover:text-institucional-verde transition-colors">
-                  Foto Institucional
-                </span>
-                <span className="text-xs text-gray-400 mt-1">
-                  Espacio disponible para imagen {item.id}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
