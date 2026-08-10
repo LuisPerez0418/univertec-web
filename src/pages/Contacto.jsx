@@ -12,10 +12,17 @@ const Contacto = () => {
     const formData = new FormData(event.target);
     formData.append('access_key', '8b6ce905-8e8d-4565-b4cd-2173383161bc');
 
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: json,
       });
 
       const data = await res.json();
@@ -112,7 +119,12 @@ const Contacto = () => {
                     Correos Electrónicos
                   </h3>
                   <p className="text-gray-600 text-sm sm:text-base mt-1">
-                    Univertecbq@gmail.com
+                    <a 
+                      href="mailto:univertec@sitcolwork.org"
+                      className="hover:text-institucional-verde transition-colors"
+                    >
+                      univertec@sitcolwork.org
+                    </a>
                   </p>
                 </div>
               </div>
@@ -161,7 +173,7 @@ const Contacto = () => {
                 </label>
                 <input
                   type="text"
-                  name="nombre"
+                  name="Nombre"
                   required
                   placeholder="Ej: Juan Pérez"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400"
@@ -175,7 +187,7 @@ const Contacto = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
+                  name="Email"
                   required
                   placeholder="Ej: juan.perez@correo.com"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400"
@@ -189,7 +201,7 @@ const Contacto = () => {
                 </label>
                 <input
                   type="tel"
-                  name="telefono"
+                  name="Telefono"
                   required
                   placeholder="Ej: +57 301 1028224"
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 placeholder-gray-400"
@@ -202,7 +214,7 @@ const Contacto = () => {
                   Programa de Interés
                 </label>
                 <select
-                  name="programa"
+                  name="Programa"
                   required
                   defaultValue=""
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-institucional-amarillo focus:border-institucional-amarillo transition-colors text-gray-800 bg-white"
@@ -226,7 +238,7 @@ const Contacto = () => {
                   Mensaje
                 </label>
                 <textarea
-                  name="mensaje"
+                  name="Mensaje"
                   rows={4}
                   required
                   placeholder="Escribe tu mensaje o inquietud aquí..."
