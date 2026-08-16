@@ -63,15 +63,15 @@ const Navbar = () => {
             <Link to="/" onClick={closeMobileMenu} className="flex items-center gap-2.5 sm:gap-3 group">
               <img
                 src={logo}
-                alt="Logo UNIVERTEC"
+                alt="Logo Univertec - Fundación Universal de Estudios Técnicos"
                 className="h-12 sm:h-14 w-auto object-contain transition-transform duration-200 group-hover:scale-105 shrink-0"
               />
               <div className="flex flex-col justify-center">
                 <span className="font-extrabold text-lg sm:text-2xl tracking-tight text-institucional-verde leading-none">
                   UNIVERTEC
                 </span>
-                <span className="text-[9px] sm:text-xs font-semibold text-gray-500 tracking-wider mt-0.5">
-                  FUNDACIÓN UNIVERSAL
+                <span className="text-xs md:text-sm font-semibold text-gray-500 mt-0.5 whitespace-normal leading-tight max-w-[160px] sm:max-w-[250px] md:max-w-none">
+                  Fundación Universal de Estudios Técnicos
                 </span>
               </div>
             </Link>

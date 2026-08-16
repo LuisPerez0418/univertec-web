@@ -1,13 +1,24 @@
 import React from 'react';
+import banner7 from '../assets/banner7.jpeg';
 
 const Programas = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-4 md:px-8">
-      <h1 className="text-institucional-verde font-bold text-3xl md:text-4xl mb-10 text-center">
-        Nuestros Programas Técnicos
-      </h1>
+    <div className="min-h-screen bg-gray-50 pb-16">
+      {/* Banner Superior */}
+      <div className="w-full">
+        <img
+          src={banner7}
+          alt="Banner Programas Técnicos"
+          className="w-full h-auto block shadow-md"
+        />
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <div className="container mx-auto px-4 mt-12 md:mt-16">
+        <h1 className="text-institucional-verde font-bold text-3xl md:text-4xl mb-10 text-center">
+          Nuestros Programas Técnicos
+        </h1>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
         {/* Tarjeta 1: Primera Infancia */}
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
           <div className="bg-institucional-verde text-white p-6">
@@ -136,6 +147,7 @@ const Programas = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

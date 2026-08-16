@@ -15,7 +15,7 @@ import secretariaM from '../assets/secretariaDeMalambo.png';
 import banner6 from '../assets/banner6.jpeg';
 import banner7 from '../assets/banner7.jpeg';
 import banner8 from '../assets/banner8.jpeg';
-import banner9 from '../assets/banner9.jpeg';
+import logo14anos from '../assets/univertecbanner14ano.png';
 import banner10 from '../assets/banner10.jpeg';
 import banner11 from '../assets/banner11.jpeg';
 
@@ -25,9 +25,8 @@ const Inicio = () => {
   // Arreglo de datos del slider
   const slides = [
     { id: 6, image: banner6, title: "" },
-    { id: 7, image: banner7, title: "" },
     { id: 8, image: banner8, title: "" },
-    { id: 9, image: banner9, title: "" },
+    { id: 9, image: logo14anos, title: "" },
     { id: 10, image: banner10, title: "" },
     { id: 11, image: banner11, title: "" }
   ];
@@ -84,7 +83,7 @@ const Inicio = () => {
   return (
     <div className="w-full">
       {/* Sección 1: Hero Slider */}
-      <section className="relative w-full h-[600px] md:h-[750px] lg:h-[80vh] min-h-[600px] overflow-hidden">
+      <section className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-[21/9] bg-[#0b1727] overflow-hidden">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
@@ -95,29 +94,15 @@ const Inicio = () => {
             <img
               src={slide.image}
               alt={slide.title}
-              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+              className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out"
             />
-            {slide.title ? <div className="absolute inset-0 bg-black/60"></div> : null}
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 md:px-20 z-20">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 drop-shadow-lg max-w-4xl leading-tight">
-                {slide.title}
-              </h1>
-              {slide.cta && slide.link && (
-                <Link
-                  to={slide.link}
-                  className="bg-institucional-azul hover:bg-teal-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105 duration-300 inline-block"
-                >
-                  {slide.cta}
-                </Link>
-              )}
-            </div>
           </div>
         ))}
 
         {/* Controles de Navegación Izquierda */}
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 -translate-y-1/2 left-4 text-white/70 hover:text-white text-4xl p-4 cursor-pointer transition-colors z-30"
+          className="absolute top-1/2 -translate-y-1/2 left-4 text-white/70 hover:text-white text-2xl md:text-4xl p-1 md:p-4 cursor-pointer transition-colors z-30"
           aria-label="Anterior"
         >
           &#10094;
@@ -126,14 +111,14 @@ const Inicio = () => {
         {/* Controles de Navegación Derecha */}
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 -translate-y-1/2 right-4 text-white/70 hover:text-white text-4xl p-4 cursor-pointer transition-colors z-30"
+          className="absolute top-1/2 -translate-y-1/2 right-4 text-white/70 hover:text-white text-2xl md:text-4xl p-1 md:p-4 cursor-pointer transition-colors z-30"
           aria-label="Siguiente"
         >
           &#10095;
         </button>
 
         {/* Indicadores (Dots) */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
+        <div className="absolute bottom-2 md:bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -212,6 +197,15 @@ const Inicio = () => {
           <p className="text-gray-600 mb-8 mt-3 text-base sm:text-lg leading-relaxed">
             Conoce las experiencias prácticas y el impacto de nuestra comunidad educativa en su entorno.
           </p>
+        </div>
+
+        {/* Banner Galería Inclusiva */}
+        <div className="mb-8">
+          <img
+            src={banner11}
+            alt="Banner Galería Inclusiva"
+            className="w-full h-auto block rounded-lg shadow-md mb-8"
+          />
         </div>
 
         {/* Grid responsivo de actividades */}

@@ -48,6 +48,33 @@ const Footer = () => {
               </span>
             </li>
 
+            {/* Email */}
+            <li className="flex items-center space-x-2.5">
+              <svg
+                className="w-5 h-5 text-institucional-amarillo shrink-0"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+              <span>
+                <strong className="text-white font-medium">Email:</strong>{' '}
+                <a
+                  href="mailto:univertec@sitcolwork.org"
+                  className="hover:text-institucional-amarillo transition-colors"
+                >
+                  univertec@sitcolwork.org
+                </a>
+              </span>
+            </li>
+
             {/* Horario */}
             <li className="flex items-center space-x-2.5">
               <svg
@@ -88,29 +115,13 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="#"
-                className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
-              >
-                <span className="text-institucional-amarillo text-xs">▸</span>
-                <span>PQRS</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
+                href="https://siet.mineducacion.gov.co/siet/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
               >
                 <span className="text-institucional-amarillo text-xs">▸</span>
                 <span>Consulta SIET</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="hover:text-institucional-amarillo transition-colors duration-200 inline-flex items-center space-x-1.5"
-              >
-                <span className="text-institucional-amarillo text-xs">▸</span>
-                <span>Plataforma Q10</span>
               </a>
             </li>
           </ul>
@@ -118,8 +129,9 @@ const Footer = () => {
       </div>
 
       {/* Franja Inferior (Copyright) */}
-      <div className="max-w-7xl mx-auto border-t border-gray-700 mt-8 pt-8 text-center text-xs sm:text-sm text-gray-400">
-        © 2026 Fundación Universal de Estudios Técnicos – UNIVERTEC. Todos los derechos reservados.
+      <div className="max-w-7xl mx-auto border-t border-gray-700 mt-8 pt-8 flex flex-col items-center justify-center space-y-1 text-center text-xs sm:text-sm text-gray-400">
+        <p>© 2026 Fundación Universal de Estudios Técnicos – UNIVERTEC. Todos los derechos reservados.</p>
+        <p className="text-sm text-gray-500 mt-2">Sitio desarrollado por TurtleZ</p>
       </div>
     </footer>
   );

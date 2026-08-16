@@ -50,66 +50,73 @@ const Transparencia = () => {
       <section className="bg-gray-50 py-16">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {documentos.map((doc) => (
-              <div
-                key={doc.id}
-                className="bg-white rounded-xl shadow-md p-8 border-l-4 border-institucional-amarillo hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 group"
-              >
-                {/* Ícono SVG del documento */}
-                <div className="w-14 h-14 shrink-0 rounded-xl bg-institucional-verde/5 flex items-center justify-center text-institucional-verde group-hover:bg-institucional-amarillo/20 transition-colors duration-300">
-                  <svg
-                    className="w-8 h-8"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.8}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
-                </div>
-
-                {/* Información y botón de descarga */}
-                <div className="flex-1 flex flex-col justify-between h-full">
-                  <div>
-                    <h2 className="text-xl font-bold text-institucional-verde group-hover:text-institucional-verdeClaro transition-colors">
-                      {doc.titulo}
-                    </h2>
-                    <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-2">
-                      {doc.descripcion}
-                    </p>
-                  </div>
-
-                  <div>
-                    <a
-                      href={doc.enlace}
-                      download
-                      className="bg-institucional-amarillo text-institucional-verde px-4 py-2 rounded font-semibold inline-flex items-center gap-2 mt-4 hover:bg-yellow-500 transition-colors shadow-sm hover:shadow"
+            {documentos.map((doc) => {
+              const isManual = doc.titulo === 'Manual de Convivencia';
+              return (
+                <div
+                  key={doc.id}
+                  className="bg-white rounded-xl shadow-md p-8 border-l-4 border-institucional-amarillo hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 group"
+                >
+                  {/* Ícono SVG del documento */}
+                  <div className="w-14 h-14 shrink-0 rounded-xl bg-institucional-verde/5 flex items-center justify-center text-institucional-verde group-hover:bg-institucional-amarillo/20 transition-colors duration-300">
+                    <svg
+                      className="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      <span>Descargar PDF</span>
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.8}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Información y botón de descarga */}
+                  <div className="flex-1 flex flex-col justify-between h-full">
+                    <div>
+                      <h2 className="text-xl font-bold text-institucional-verde group-hover:text-institucional-verdeClaro transition-colors">
+                        {doc.titulo}
+                      </h2>
+                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed mt-2">
+                        {doc.descripcion}
+                      </p>
+                    </div>
+
+                    <div>
+                      <a
+                        href={isManual ? undefined : doc.enlace}
+                        download={!isManual}
+                        className={`px-4 py-2 rounded font-semibold inline-flex items-center gap-2 mt-4 shadow-sm ${
+                          isManual
+                            ? 'bg-institucional-amarillo text-institucional-verde opacity-50 cursor-not-allowed pointer-events-none'
+                            : 'bg-institucional-amarillo text-institucional-verde hover:bg-yellow-500 transition-colors hover:shadow'
+                        }`}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                        />
-                      </svg>
-                    </a>
+                        <span>Descargar PDF</span>
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                          />
+                        </svg>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
