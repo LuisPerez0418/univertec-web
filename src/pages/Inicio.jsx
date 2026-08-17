@@ -125,7 +125,12 @@ const Inicio = () => {
     <div className="w-full">
       {/* Sección 1: Hero Slider */}
       <section className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-[21/9] bg-[#0b1727] overflow-hidden">
-        {banners.map((slide, index) => (
+        {banners.map((slide, index) => {
+          const imageUrl = slide.imagenUrl.startsWith('/uploads') 
+            ? `https://api.univertec.org${slide.imagenUrl}` 
+            : slide.imagenUrl;
+            
+          return (
           <div
             key={slide._id}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
@@ -135,20 +140,20 @@ const Inicio = () => {
             {slide.enlace ? (
               <a href={slide.enlace} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
                 <img
-                  src={slide.imagenUrl}
+                  src={imageUrl}
                   alt={slide.titulo}
                   className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out"
                 />
               </a>
             ) : (
               <img
-                src={slide.imagenUrl}
+                src={imageUrl}
                 alt={slide.titulo}
                 className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out"
               />
             )}
           </div>
-        ))}
+        )})}
 
         {/* Controles de Navegación Izquierda */}
         <button
@@ -261,10 +266,16 @@ const Inicio = () => {
 
         {/* Grid responsivo de actividades */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {actividades.map((item) => (
+          {actividades.map((item) => {
+            const imgSource = item.imagenUrl || item.imagen || '';
+            const finalImageUrl = imgSource.startsWith('/uploads') 
+              ? `https://api.univertec.org${imgSource}` 
+              : imgSource;
+
+            return (
             <div key={item._id} className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out cursor-pointer">
               <img
-                src={item.imagenUrl || item.imagen}
+                src={finalImageUrl}
                 alt={item.titulo}
                 className="w-full h-64 md:h-72 object-cover group-hover:scale-110 transition-transform duration-500"
                 onError={(e) => { e.target.src = 'https://via.placeholder.com/400x300?text=Univertec'; }}
