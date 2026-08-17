@@ -13,7 +13,7 @@ export const createProyecto = async (req, res) => {
   try {
     const proyectoData = { ...req.body };
     if (req.file) {
-      proyectoData.imagenUrl = `http://localhost:5001/uploads/${req.file.filename}`;
+      proyectoData.imagenUrl = `/uploads/${req.file.filename}`;
     }
     
     const nuevoProyecto = new Proyecto(proyectoData);
@@ -29,7 +29,7 @@ export const updateProyecto = async (req, res) => {
     const { id } = req.params;
     const proyectoData = { ...req.body };
     if (req.file) {
-      proyectoData.imagenUrl = `http://localhost:5001/uploads/${req.file.filename}`;
+      proyectoData.imagenUrl = `/uploads/${req.file.filename}`;
     }
 
     const actualizado = await Proyecto.findByIdAndUpdate(id, proyectoData, { new: true });

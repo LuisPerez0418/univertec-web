@@ -14,7 +14,7 @@ export const createBanner = async (req, res) => {
     const bannerData = { ...req.body };
     if (req.file) {
       // Si el servidor está en producción, usaríamos req.protocol + req.get('host')
-      bannerData.imagenUrl = `http://localhost:5001/uploads/${req.file.filename}`;
+      bannerData.imagenUrl = `/uploads/${req.file.filename}`;
     }
     
     const nuevoBanner = new Banner(bannerData);
@@ -30,7 +30,7 @@ export const updateBanner = async (req, res) => {
     const { id } = req.params;
     const bannerData = { ...req.body };
     if (req.file) {
-      bannerData.imagenUrl = `http://localhost:5001/uploads/${req.file.filename}`;
+      bannerData.imagenUrl = `/uploads/${req.file.filename}`;
     }
 
     const actualizado = await Banner.findByIdAndUpdate(id, bannerData, { new: true });
