@@ -180,7 +180,7 @@ const AdminBanners = () => {
                   <tr key={banner._id} className="hover:bg-gray-50 transition-colors">
                     <td className="p-4">
                       <img 
-                        src={banner.imagenUrl} 
+                        src={banner.imagenUrl.startsWith('/uploads') ? `https://api.univertec.org${banner.imagenUrl}` : banner.imagenUrl} 
                         alt={banner.titulo} 
                         className="w-16 h-10 object-cover rounded shadow-sm border border-gray-200"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Error'; }}

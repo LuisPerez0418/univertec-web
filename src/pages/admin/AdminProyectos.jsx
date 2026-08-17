@@ -174,7 +174,7 @@ const AdminProyectos = () => {
                   <tr key={proyecto._id} className="hover:bg-gray-50 transition-colors">
                     <td className="p-4">
                       <img 
-                        src={proyecto.imagenUrl} 
+                        src={proyecto.imagenUrl.startsWith('/uploads') ? `https://api.univertec.org${proyecto.imagenUrl}` : proyecto.imagenUrl} 
                         alt={proyecto.titulo} 
                         className="w-16 h-12 object-cover rounded shadow-sm border border-gray-200"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Error'; }}
