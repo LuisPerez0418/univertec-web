@@ -11,7 +11,13 @@ import Contacto from './pages/Contacto';
 import Admisiones from './pages/Admisiones';
 import Programas from './pages/Programas';
 import Cursos from './pages/Cursos';
-
+import AdminProgramas from './pages/admin/AdminProgramas';
+import AdminBanners from './pages/admin/AdminBanners';
+import AdminProyectos from './pages/admin/AdminProyectos';
+import AdminContenidos from './pages/admin/AdminContenidos';
+import Dashboard from './pages/admin/Dashboard';
+import Login from './pages/admin/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 const Donaciones = () => (
   <div className="container mx-auto max-w-7xl min-h-[75vh] flex flex-col items-center justify-center px-4 py-12 text-center">
     <h1 className="text-3xl md:text-4xl font-bold text-institucional-verde mb-4">Apoya a UNIVERTEC</h1>
@@ -50,6 +56,18 @@ function App() {
             <Route path="/donaciones" element={<Donaciones />} />
             <Route path="/transparencia" element={<Transparencia />} />
             <Route path="/contacto" element={<Contacto />} />
+            
+            {/* Ruta Login */}
+            <Route path="/login" element={<Login />} />
+
+            {/* Rutas Administrativas (CMS) protegidas */}
+            <Route path="/admin" element={<ProtectedRoute />}>
+              <Route index element={<Dashboard />} />
+              <Route path="programas" element={<AdminProgramas />} />
+              <Route path="banners" element={<AdminBanners />} />
+              <Route path="proyectos" element={<AdminProyectos />} />
+              <Route path="contenidos" element={<AdminContenidos />} />
+            </Route>
           </Routes>
         </main>
 

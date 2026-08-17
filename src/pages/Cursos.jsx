@@ -1,165 +1,116 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CourseItem = ({ nombre, horas }) => (
   <li className="flex justify-between items-center text-sm gap-2">
     <span className="text-gray-700">{nombre}</span>
     <span className="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs font-semibold shrink-0">
-      {horas}
+      {horas}h
     </span>
   </li>
 );
 
 const Cursos = () => {
-  const areaAdministrativa = {
-    diplomados: [
-      { nombre: 'Gestión Administrativa y Organizacional', horas: '120 horas' },
-      { nombre: 'Gestión del Talento Humano', horas: '120 horas' },
-      { nombre: 'Nómina y Seguridad Social', horas: '100 horas' },
-      { nombre: 'Emprendimiento y Creación de Empresa', horas: '80 horas' },
-      { nombre: 'Servicio al Cliente y Gestión Comercial', horas: '100 horas' },
-    ],
-    cursosCortos: [
-      { nombre: 'Atención al cliente y manejo de PQRS', horas: '40 horas' },
-      { nombre: 'Archivo y gestión documental', horas: '40 horas' },
-      { nombre: 'Herramientas ofimáticas (Word, Excel y PowerPoint)', horas: '60 horas' },
-      { nombre: 'Excel básico, intermedio y avanzado', horas: '80 horas' },
-      { nombre: 'Facturación y manejo de documentos contables', horas: '40 horas' },
-      { nombre: 'Comunicación efectiva y trabajo en equipo', horas: '30 horas' },
-      { nombre: 'Liderazgo y habilidades blandas', horas: '40 horas' },
-      { nombre: 'Primeros auxilios básicos', horas: '40 horas' },
-    ],
-  };
+  const [cursos, setCursos] = useState([]);
+  const [diplomados, setDiplomados] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const areaPrimeraInfancia = {
-    diplomados: [
-      { nombre: 'Diplomado en Atención Integral a la Primera Infancia', horas: '120 horas' },
-      { nombre: 'Diplomado en Estrategias Pedagógicas para el Desarrollo Infantil', horas: '100 horas' },
-      { nombre: 'Diplomado en Inclusión Educativa y Atención a la Diversidad', horas: '80 horas' },
-    ],
-    cursosCortos: [
-      { nombre: 'Estimulación temprana', horas: '40 horas' },
-      { nombre: 'Actividades lúdico-pedagógicas para niños', horas: '40 horas' },
-      { nombre: 'Desarrollo socioemocional en la infancia', horas: '40 horas' },
-      { nombre: 'Escuela de padres y acompañamiento familiar', horas: '30 horas' },
-      { nombre: 'Prevención del maltrato infantil', horas: '40 horas' },
-      { nombre: 'Diseño de material didáctico', horas: '40 horas' },
-    ],
-  };
+  useEffect(() => {
+    const fetchProgramas = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/programas');
+        const data = await response.json();
+        if (data.success) {
+          const activos = data.data.filter(p => p.estado);
+          
+          setDiplomados(activos.filter(p => p.tipo === 'Diplomado'));
+          setCursos(activos.filter(p => p.tipo === 'Curso'));
+        }
+      } catch (error) {
+        console.error('Error al cargar cursos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const areaAmbiental = {
-    diplomados: [
-      { nombre: 'Diplomado en Gestión Ambiental Empresarial', horas: '120 horas' },
-      { nombre: 'Diplomado en Gestión Integral de Residuos Sólidos', horas: '100 horas' },
-      { nombre: 'Diplomado en Saneamiento Básico y Salud Ambiental', horas: '120 horas' },
-      { nombre: 'Diplomado en Educación Ambiental y Desarrollo Sostenible', horas: '80 horas' },
-    ],
-    cursosCortos: [
-      { nombre: 'Manejo adecuado de residuos sólidos', horas: '40 horas' },
-      { nombre: 'Separación en la fuente y aprovechamiento de residuos', horas: '30 horas' },
-      { nombre: 'Educación ambiental comunitaria', horas: '40 horas' },
-      { nombre: 'Gestión del recurso hídrico', horas: '40 horas' },
-      { nombre: 'Buenas prácticas ambientales empresariales', horas: '40 horas' },
-      { nombre: 'Introducción a la gestión ambiental', horas: '30 horas' },
-    ],
-  };
+    fetchProgramas();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4 md:px-8">
       <h1 className="text-institucional-verde font-bold text-3xl md:text-4xl mb-4 text-center">
         Diplomados y Cursos Cortos
       </h1>
+      <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+        Explora nuestra oferta de educación continua diseñada para fortalecer tus habilidades profesionales y potenciar tu perfil laboral.
+      </p>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 max-w-7xl mx-auto mt-10">
-        {/* Tarjeta 1: Área Administrativa */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
-          <div className="bg-institucional-verde text-white p-4 text-center font-bold text-xl">
-            Área Administrativa
-          </div>
-          <div className="p-6 space-y-6 flex-grow">
-            <div>
-              <h2 className="text-institucional-amarillo font-bold text-lg border-b border-gray-200 pb-2 mb-3">
-                Diplomados
-              </h2>
-              <ul className="space-y-2">
-                {areaAdministrativa.diplomados.map((item, index) => (
-                  <CourseItem key={index} nombre={item.nombre} horas={item.horas} />
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-institucional-amarillo font-bold text-lg border-b border-gray-200 pb-2 mb-3">
-                Cursos Cortos
-              </h2>
-              <ul className="space-y-2">
-                {areaAdministrativa.cursosCortos.map((item, index) => (
-                  <CourseItem key={index} nombre={item.nombre} horas={item.horas} />
-                ))}
-              </ul>
-            </div>
-          </div>
+      {loading ? (
+        <div className="text-center text-gray-500 py-10">
+          <svg className="animate-spin h-10 w-10 text-[#006039] mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p>Cargando oferta académica...</p>
         </div>
-
-        {/* Tarjeta 2: Área Primera Infancia */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
-          <div className="bg-institucional-verde text-white p-4 text-center font-bold text-xl">
-            Área de Primera Infancia
-          </div>
-          <div className="p-6 space-y-6 flex-grow">
-            <div>
-              <h2 className="text-institucional-amarillo font-bold text-lg border-b border-gray-200 pb-2 mb-3">
-                Diplomados
-              </h2>
-              <ul className="space-y-2">
-                {areaPrimeraInfancia.diplomados.map((item, index) => (
-                  <CourseItem key={index} nombre={item.nombre} horas={item.horas} />
-                ))}
-              </ul>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          
+          {/* Columna Diplomados */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-institucional-verde text-white p-4 text-center font-bold text-xl flex items-center justify-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              Nuestros Diplomados
             </div>
-
-            <div>
-              <h2 className="text-institucional-amarillo font-bold text-lg border-b border-gray-200 pb-2 mb-3">
-                Cursos Cortos
-              </h2>
-              <ul className="space-y-2">
-                {areaPrimeraInfancia.cursosCortos.map((item, index) => (
-                  <CourseItem key={index} nombre={item.nombre} horas={item.horas} />
-                ))}
-              </ul>
+            <div className="p-6 space-y-6 flex-grow">
+              {diplomados.length === 0 ? (
+                <p className="text-gray-500 text-center py-4">Aún no hay diplomados disponibles.</p>
+              ) : (
+                <ul className="space-y-4">
+                  {diplomados.map((item) => (
+                    <li key={item._id} className="border-b border-gray-100 pb-3 last:border-0">
+                      <div className="flex justify-between items-start gap-2 mb-1">
+                        <span className="text-gray-800 font-bold">{item.titulo}</span>
+                        <span className="bg-institucional-amarillo text-[#006039] px-2 py-0.5 rounded text-xs font-bold shrink-0">
+                          {item.duracion_horas}h
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 line-clamp-2">Certificación: {item.certificacion}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
+
+          {/* Columna Cursos */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-institucional-verde text-white p-4 text-center font-bold text-xl flex items-center justify-center gap-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              Nuestros Cursos Cortos
+            </div>
+            <div className="p-6 space-y-6 flex-grow">
+              {cursos.length === 0 ? (
+                <p className="text-gray-500 text-center py-4">Aún no hay cursos disponibles.</p>
+              ) : (
+                <ul className="space-y-4">
+                  {cursos.map((item) => (
+                    <li key={item._id} className="border-b border-gray-100 pb-3 last:border-0">
+                      <div className="flex justify-between items-start gap-2 mb-1">
+                        <span className="text-gray-800 font-bold">{item.titulo}</span>
+                        <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs font-semibold shrink-0">
+                          {item.duracion_horas}h
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 line-clamp-2">Certificación: {item.certificacion}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+
         </div>
-
-        {/* Tarjeta 3: Área Ambiental y Saneamiento */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
-          <div className="bg-institucional-verde text-white p-4 text-center font-bold text-xl">
-            Área Ambiental y Saneamiento
-          </div>
-          <div className="p-6 space-y-6 flex-grow">
-            <div>
-              <h2 className="text-institucional-amarillo font-bold text-lg border-b border-gray-200 pb-2 mb-3">
-                Diplomados
-              </h2>
-              <ul className="space-y-2">
-                {areaAmbiental.diplomados.map((item, index) => (
-                  <CourseItem key={index} nombre={item.nombre} horas={item.horas} />
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h2 className="text-institucional-amarillo font-bold text-lg border-b border-gray-200 pb-2 mb-3">
-                Cursos Cortos
-              </h2>
-              <ul className="space-y-2">
-                {areaAmbiental.cursosCortos.map((item, index) => (
-                  <CourseItem key={index} nombre={item.nombre} horas={item.horas} />
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

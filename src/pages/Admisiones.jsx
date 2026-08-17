@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Admisiones = () => {
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+    fetch('http://localhost:5001/api/content')
+      .then(res => res.json())
+      .then(data => {
+        if(data.success) setContent(data.data);
+      })
+      .catch(console.error);
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 md:px-8">
       <div className="max-w-4xl mx-auto">
@@ -23,19 +33,27 @@ const Admisiones = () => {
             </svg>
           </summary>
           <div className="pt-3 border-t border-gray-100 mt-3 space-y-3">
-            <p className="text-gray-700 leading-relaxed">
-              Si ya elegiste el programa de formación que deseas estudiar, te invitamos a revisar cuidadosamente toda la información relacionada con el plan de estudios, los requisitos de ingreso, las fechas de inicio, los costos...
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              Antes de iniciar el proceso de matrícula, es importante que conozcas y aceptes el Reglamento Estudiantil...
-            </p>
-            <p className="font-semibold text-gray-800 pt-2">Pasos:</p>
-            <ol className="list-decimal list-inside space-y-2 mt-4 text-gray-700">
-              <li>1. Diligencia el formulario.</li>
-              <li>2. Adjunta la documentación.</li>
-              <li>3. Realiza el pago.</li>
-              <li>4. Efectúa el pago del programa.</li>
-            </ol>
+            {content['admisiones-inscripcion'] ? (
+              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {content['admisiones-inscripcion']}
+              </p>
+            ) : (
+              <>
+                <p className="text-gray-700 leading-relaxed">
+                  Si ya elegiste el programa de formación que deseas estudiar, te invitamos a revisar cuidadosamente toda la información relacionada con el plan de estudios, los requisitos de ingreso, las fechas de inicio, los costos...
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  Antes de iniciar el proceso de matrícula, es importante que conozcas y aceptes el Reglamento Estudiantil...
+                </p>
+                <p className="font-semibold text-gray-800 pt-2">Pasos:</p>
+                <ol className="list-decimal list-inside space-y-2 mt-4 text-gray-700">
+                  <li>1. Diligencia el formulario.</li>
+                  <li>2. Adjunta la documentación.</li>
+                  <li>3. Realiza el pago.</li>
+                  <li>4. Efectúa el pago del programa.</li>
+                </ol>
+              </>
+            )}
           </div>
         </details>
 
@@ -54,14 +72,22 @@ const Admisiones = () => {
             </svg>
           </summary>
           <div className="pt-3 border-t border-gray-100 mt-3">
-            <ul className="list-disc list-inside space-y-2 mt-4 text-gray-700">
-              <li>Copia legible del documento de identidad.</li>
-              <li>Copia del diploma de bachiller o acta de grado (o certificado de noveno grado).</li>
-              <li>Comprobante de pago del carné institucional y del seguro estudiantil.</li>
-            </ul>
-            <p className="mt-4 p-3 bg-gray-50 rounded-md border-l-4 border-institucional-verde text-gray-700 leading-relaxed">
-              <span className="font-semibold">Nota:</span> Una vez formalizada la matrícula, el estudiante deberá asistir a la jornada de inducción institucional, cuya participación es obligatoria.
-            </p>
+            {content['admisiones-requisitos'] ? (
+              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                {content['admisiones-requisitos']}
+              </p>
+            ) : (
+              <>
+                <ul className="list-disc list-inside space-y-2 mt-4 text-gray-700">
+                  <li>Copia legible del documento de identidad.</li>
+                  <li>Copia del diploma de bachiller o acta de grado (o certificado de noveno grado).</li>
+                  <li>Comprobante de pago del carné institucional y del seguro estudiantil.</li>
+                </ul>
+                <p className="mt-4 p-3 bg-gray-50 rounded-md border-l-4 border-institucional-verde text-gray-700 leading-relaxed">
+                  <span className="font-semibold">Nota:</span> Una vez formalizada la matrícula, el estudiante deberá asistir a la jornada de inducción institucional, cuya participación es obligatoria.
+                </p>
+              </>
+            )}
           </div>
         </details>
 

@@ -21,81 +21,132 @@ import banner11 from '../assets/banner11.jpeg';
 
 const Inicio = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [banners, setBanners] = useState([]);
 
-  // Arreglo de datos del slider
-  const slides = [
-    { id: 6, image: banner6, title: "" },
-    { id: 8, image: banner8, title: "" },
-    { id: 9, image: logo14anos, title: "" },
-    { id: 10, image: banner10, title: "" },
-    { id: 11, image: banner11, title: "" }
-  ];
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/banners');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.data.length > 0) {
+            const activos = result.data.filter(b => b.activo);
+            if (activos.length > 0) {
+              setBanners(activos);
+              return;
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching banners:', error);
+      }
+      
+      // Fallback a banners estáticos
+      setBanners([
+        { _id: 6, imagenUrl: banner6, titulo: "" },
+        { _id: 8, imagenUrl: banner8, titulo: "" },
+        { _id: 9, imagenUrl: logo14anos, titulo: "" },
+        { _id: 10, imagenUrl: banner10, titulo: "" },
+        { _id: 11, imagenUrl: banner11, titulo: "" }
+      ]);
+    };
+
+    fetchBanners();
+  }, []);
 
   // Funciones de navegación manual para el slider
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % (banners.length || 1));
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + (banners.length || 1)) % (banners.length || 1));
   };
 
   // Autoplay del slider cada 5 segundos
   useEffect(() => {
+    if (banners.length === 0) return;
     const interval = setInterval(() => {
       nextSlide();
     }, 5000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [banners.length]);
 
   // Datos para Proyectos y Actividades Realizadas
-  const actividades = [
-    {
-      id: '001',
-      titulo: 'Prácticas Pedagógicas',
-      descripcion:
-        'Nuestros estudiantes de Primera Infancia aplicando metodologías lúdicas en centros de desarrollo infantil.',
-      imagen: evento1,
-    },
-    {
-      id: '002',
-      titulo: 'Jornadas de Saneamiento',
-      descripcion:
-        'Campañas de concientización, recolección de residuos y cuidado del medio ambiente lideradas por el área ambiental.',
-      imagen: evento2,
-    },
-    {
-      id: '003',
-      titulo: 'Talleres de Liderazgo',
-      descripcion:
-        'Fortalecimiento de habilidades blandas, trabajo en equipo y resolución de conflictos para el ámbito laboral.',
-      imagen: evento3,
-    },
-    {
-      id: '004',
-      titulo: 'Intervención Comunitaria',
-      descripcion:
-        'Proyectos de impacto social y apoyo integral dirigidos a poblaciones vulnerables de la región.',
-      imagen: evento4,
-    },
-  ];
+  const [actividades, setActividades] = useState([]);
+
+  useEffect(() => {
+    const fetchProyectos = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/proyectos');
+        if (response.ok) {
+          const result = await response.json();
+          if (result.success && result.data.length > 0) {
+            setActividades(result.data.slice(0, 4)); // Tomar solo los últimos 4 para el home
+            return;
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching proyectos:', error);
+      }
+      
+      // Fallback estático
+      setActividades([
+        {
+          _id: '001',
+          titulo: 'Prácticas Pedagógicas',
+          descripcion: 'Nuestros estudiantes de Primera Infancia aplicando metodologías lúdicas en centros de desarrollo infantil.',
+          imagenUrl: evento1,
+        },
+        {
+          _id: '002',
+          titulo: 'Jornadas de Saneamiento',
+          descripcion: 'Campañas de concientización, recolección de residuos y cuidado del medio ambiente lideradas por el área ambiental.',
+          imagenUrl: evento2,
+        },
+        {
+          _id: '003',
+          titulo: 'Talleres de Liderazgo',
+          descripcion: 'Fortalecimiento de habilidades blandas, trabajo en equipo y resolución de conflictos para el ámbito laboral.',
+          imagenUrl: evento3,
+        },
+        {
+          _id: '004',
+          titulo: 'Intervención Comunitaria',
+          descripcion: 'Proyectos de impacto social y apoyo integral dirigidos a poblaciones vulnerables de la región.',
+          imagenUrl: evento4,
+        }
+      ]);
+    };
+    fetchProyectos();
+  }, []);
 
   return (
     <div className="w-full">
       {/* Sección 1: Hero Slider */}
       <section className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-[21/9] bg-[#0b1727] overflow-hidden">
-        {slides.map((slide, index) => (
+        {banners.map((slide, index) => (
           <div
-            key={slide.id}
+            key={slide._id}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
               index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
-            <img
-              src={slide.image}
-              alt={slide.title}
-              className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out"
-            />
+            {slide.enlace ? (
+              <a href={slide.enlace} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                <img
+                  src={slide.imagenUrl}
+                  alt={slide.titulo}
+                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out"
+                />
+              </a>
+            ) : (
+              <img
+                src={slide.imagenUrl}
+                alt={slide.titulo}
+                className="absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ease-in-out"
+              />
+            )}
           </div>
         ))}
 
@@ -119,7 +170,7 @@ const Inicio = () => {
 
         {/* Indicadores (Dots) */}
         <div className="absolute bottom-2 md:bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
-          {slides.map((_, index) => (
+          {banners.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
@@ -211,12 +262,18 @@ const Inicio = () => {
         {/* Grid responsivo de actividades */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {actividades.map((item) => (
-            <div key={item.id} className="relative group">
+            <div key={item._id} className="relative group overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 ease-in-out cursor-pointer">
               <img
-                src={item.imagen}
+                src={item.imagenUrl || item.imagen}
                 alt={item.titulo}
-                className="w-full h-64 md:h-72 object-cover rounded-2xl shadow-md hover:shadow-2xl hover:scale-105 transition-all duration-300 ease-in-out"
+                className="w-full h-64 md:h-72 object-cover group-hover:scale-110 transition-transform duration-500"
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/400x300?text=Univertec'; }}
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <span className="text-institucional-amarillo text-xs font-bold uppercase tracking-wider mb-2">{item.categoria || 'Actividad'}</span>
+                <h3 className="text-white font-bold text-xl mb-2">{item.titulo}</h3>
+                <p className="text-gray-200 text-sm line-clamp-2">{item.descripcion}</p>
+              </div>
             </div>
           ))}
         </div>

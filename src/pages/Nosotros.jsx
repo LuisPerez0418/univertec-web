@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import fotoFundadora from '../assets/fundadora.jpeg';
 
 const Nosotros = () => {
+  const [content, setContent] = useState({});
+
+  useEffect(() => {
+    fetch('http://localhost:5001/api/content')
+      .then(res => res.json())
+      .then(data => {
+        if(data.success) setContent(data.data);
+      })
+      .catch(console.error);
+  }, []);
   const valores = [
     {
       titulo: 'Innovación',
@@ -33,12 +43,20 @@ const Nosotros = () => {
             <h1 className="text-4xl font-bold text-institucional-verde mb-6">
               Nuestra Historia
             </h1>
-            <p className="text-gray-600 text-lg leading-relaxed mb-4">
-              La Fundación Universal de Estudios Técnicos – UNIVERTEC nació el 3 de julio de 2012 en la ciudad de Barranquilla, como el proyecto de una profesional emprendedora enfocada en ofrecer educación para el trabajo de alta calidad.
-            </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              Con el objetivo de expandir nuestro impacto y cobertura institucional, estamos <strong className="text-institucional-verde font-bold underline decoration-institucional-amarillo decoration-2">Certificados en el área metropolitana de Barranquilla (Malambo)</strong>, operando bajo la Licencia de Funcionamiento No. 973 del 10 de agosto de 2022.
-            </p>
+            {content['nosotros-historia'] ? (
+              <p className="text-gray-600 text-lg leading-relaxed mb-4 whitespace-pre-wrap">
+                {content['nosotros-historia']}
+              </p>
+            ) : (
+              <>
+                <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                  La Fundación Universal de Estudios Técnicos – UNIVERTEC nació el 3 de julio de 2012 en la ciudad de Barranquilla, como el proyecto de una profesional emprendedora enfocada en ofrecer educación para el trabajo de alta calidad.
+                </p>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  Con el objetivo de expandir nuestro impacto y cobertura institucional, estamos <strong className="text-institucional-verde font-bold underline decoration-institucional-amarillo decoration-2">Certificados en el área metropolitana de Barranquilla (Malambo)</strong>, operando bajo la Licencia de Funcionamiento No. 973 del 10 de agosto de 2022.
+                </p>
+              </>
+            )}
           </div>
 
           {/* Columna Derecha (Imagen) */}
@@ -65,8 +83,8 @@ const Nosotros = () => {
               <h2 className="text-institucional-amarillo text-2xl font-bold mb-4">
                 Nuestra Misión
               </h2>
-              <p className="text-gray-200 leading-relaxed text-base sm:text-lg">
-                Orientar el quehacer académico, organizacional y administrativo de UNIVERTEC, buscando insertar a nuestros egresados en el mundo laboral, formando técnicos de nivel superior que cuenten con las capacidades, habilidades y valores necesarios para incorporarse de manera efectiva en la comunidad.
+              <p className="text-gray-200 leading-relaxed text-base sm:text-lg whitespace-pre-wrap">
+                {content['nosotros-mision'] || 'Orientar el quehacer académico, organizacional y administrativo de UNIVERTEC, buscando insertar a nuestros egresados en el mundo laboral, formando técnicos de nivel superior que cuenten con las capacidades, habilidades y valores necesarios para incorporarse de manera efectiva en la comunidad.'}
               </p>
             </div>
           </div>
@@ -77,8 +95,8 @@ const Nosotros = () => {
               <h2 className="text-institucional-amarillo text-2xl font-bold mb-4">
                 Nuestra Visión
               </h2>
-              <p className="text-gray-200 leading-relaxed text-base sm:text-lg">
-                Para el año 2030, seremos una institución dirigente en la prestación de servicios de formación laboral, reconocida en el sector productivo como una organización con altos niveles de innovación, productividad y comprometida con el desarrollo integral de la sociedad.
+              <p className="text-gray-200 leading-relaxed text-base sm:text-lg whitespace-pre-wrap">
+                {content['nosotros-vision'] || 'Para el año 2030, seremos una institución dirigente en la prestación de servicios de formación laboral, reconocida en el sector productivo como una organización con altos niveles de innovación, productividad y comprometida con el desarrollo integral de la sociedad.'}
               </p>
             </div>
           </div>

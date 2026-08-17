@@ -37,6 +37,18 @@ export const createPrograma = async (req, res) => {
   }
 };
 
+// Actualizar un programa
+export const updatePrograma = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const actualizado = await Programa.findByIdAndUpdate(id, req.body, { new: true });
+    if (!actualizado) return res.status(404).json({ success: false, message: 'Programa no encontrado' });
+    return res.status(200).json({ success: true, data: actualizado });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: 'Error al actualizar el programa', error: error.message });
+  }
+};
+
 // Borrado lógico (actualizar estado a false)
 export const deletePrograma = async (req, res) => {
   try {

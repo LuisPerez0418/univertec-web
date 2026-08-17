@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import banner7 from '../assets/banner7.jpeg';
 
 const Programas = () => {
+  const [programas, setProgramas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProgramas = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/programas');
+        const data = await response.json();
+        if (data.success) {
+          // Filtrar solo los de tipo Técnico que estén activos
+          const tecnicos = data.data.filter(p => p.tipo === 'Técnico' && p.estado);
+          setProgramas(tecnicos);
+        }
+      } catch (error) {
+        console.error('Error al cargar programas:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProgramas();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50 pb-16">
       {/* Banner Superior */}
@@ -18,136 +41,83 @@ const Programas = () => {
           Nuestros Programas Técnicos
         </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-        {/* Tarjeta 1: Primera Infancia */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
-          <div className="bg-institucional-verde text-white p-6">
-            <h2 className="text-xl md:text-2xl font-bold leading-snug">
-              Técnico Laboral por Competencias en Atención Integral a la Primera Infancia
-            </h2>
+        {loading ? (
+          <div className="text-center text-gray-500 py-10">
+            <svg className="animate-spin h-10 w-10 text-[#006039] mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            <p>Cargando programas técnicos...</p>
           </div>
-
-          <div className="p-6 flex flex-col gap-4 flex-grow">
-            <div className="flex flex-wrap gap-2 mb-4">
-              <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
-                Nivel: Técnico Laboral
-              </span>
-              <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
-                Modalidad: Presencial
-              </span>
-              <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
-                Duración: 1.000 horas
-              </span>
-            </div>
-
-            <p className="text-gray-700 leading-relaxed">
-              Formar Técnicos Laborales por Competencias en Atención Integral a la Primera Infancia con las capacidades necesarias para desarrollar procesos de acompañamiento, cuidado, protección y formación de niños y niñas, mediante la implementación de estrategias pedagógicas, lúdicas y metodológicas.
-            </p>
-
-            <div className="space-y-4 pt-2 border-t border-gray-100 mt-2">
-              <div>
-                <h3 className="font-bold text-institucional-verde text-base mb-1.5">
-                  Perfil del egresado
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                  <li>Apoyar procesos de atención</li>
-                  <li>Implementar actividades lúdicas</li>
-                  <li>Promover ambientes seguros</li>
-                  <li>Aplicar estrategias de estimulación</li>
-                  <li>Participar en protección de derechos</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-institucional-verde text-base mb-1.5">
-                  Competencias
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                  <li>Brindar atención integral</li>
-                  <li>Ejecutar actividades pedagógicas</li>
-                  <li>Aplicar protocolos de cuidado e higiene</li>
-                  <li>Reconocer derechos de la primera infancia</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-institucional-verde text-base mb-1.5">
-                  Campo laboral
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                  <li>Jardines infantiles</li>
-                  <li>Instituciones educativas</li>
-                  <li>Fundaciones</li>
-                  <li>Hogares comunitarios</li>
-                  <li>Programas públicos/privados</li>
-                </ul>
-              </div>
-            </div>
+        ) : programas.length === 0 ? (
+          <div className="text-center text-gray-500 py-10">
+            No hay programas técnicos registrados en este momento.
           </div>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+            {programas.map((programa) => (
+              <div key={programa._id} className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
+                <div className="bg-institucional-verde text-white p-6">
+                  <h2 className="text-xl md:text-2xl font-bold leading-snug">
+                    {programa.titulo}
+                  </h2>
+                </div>
 
-        {/* Tarjeta 2: Saneamiento Ambiental */}
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300">
-          <div className="bg-institucional-verde text-white p-6">
-            <h2 className="text-xl md:text-2xl font-bold leading-snug">
-              Técnico Laboral por Competencias en Saneamiento Ambiental
-            </h2>
+                <div className="p-6 flex flex-col gap-4 flex-grow">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
+                      Nivel: Técnico Laboral
+                    </span>
+                    <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
+                      Duración: {programa.duracion_horas} horas
+                    </span>
+                  </div>
+
+                  <p className="text-gray-700 leading-relaxed font-semibold">
+                    Certificación: {programa.certificacion}
+                  </p>
+
+                  <div className="space-y-4 pt-4 border-t border-gray-100 mt-2">
+                    <div>
+                      <h3 className="font-bold text-institucional-verde text-base mb-2">
+                        Objetivos del Programa
+                      </h3>
+                      {programa.objetivos && programa.objetivos.length > 0 ? (
+                        <ul className="list-disc list-inside text-gray-700 space-y-2 text-sm leading-relaxed">
+                          {programa.objetivos.map((obj, i) => (
+                            <li key={i}>{obj}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="text-sm text-gray-500">No hay objetivos registrados.</p>
+                      )}
+                    </div>
+
+                    {programa.modulos && programa.modulos.length > 0 && (
+                      <div className="pt-4">
+                        <h3 className="font-bold text-institucional-verde text-base mb-2">
+                          Módulos Principales
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {programa.modulos.slice(0, 6).map((mod, i) => (
+                            <span key={i} className="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                              {mod.nombre}
+                            </span>
+                          ))}
+                          {programa.modulos.length > 6 && (
+                            <span className="bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded">
+                              +{programa.modulos.length - 6} más...
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-
-          <div className="p-6 flex flex-col gap-4 flex-grow">
-            <div className="flex flex-wrap gap-2 mb-4">
-              <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
-                Nivel: Técnico Laboral
-              </span>
-              <span className="bg-institucional-amarillo text-institucional-verde font-bold rounded-full px-3 py-1 text-xs">
-                Duración: 1.280 horas
-              </span>
-            </div>
-
-            <p className="text-gray-700 leading-relaxed">
-              Formar Técnicos Laborales con conocimientos, habilidades y capacidades técnicas para apoyar procesos relacionados con la prevención, control y mitigación de riesgos ambientales, contribuyendo a la protección de los ecosistemas, la salud pública y el bienestar de la comunidad.
-            </p>
-
-            <div className="space-y-4 pt-2 border-t border-gray-100 mt-2">
-              <div>
-                <h3 className="font-bold text-institucional-verde text-base mb-1.5">
-                  Perfil ocupacional
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                  <li>Asistente de saneamiento ambiental</li>
-                  <li>Técnico en salud ambiental</li>
-                  <li>Técnico en análisis de agua</li>
-                  <li>Asistente en gestión de residuos</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-institucional-verde text-base mb-1.5">
-                  Competencias
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                  <li>Apoyar prevención de riesgos</li>
-                  <li>Participar en saneamiento básico</li>
-                  <li>Aplicar procedimientos de manejo de residuos</li>
-                  <li>Promover prácticas sostenibles</li>
-                </ul>
-              </div>
-
-              <div>
-                <h3 className="font-bold text-institucional-verde text-base mb-1.5">
-                  Campo laboral
-                </h3>
-                <ul className="list-disc list-inside text-gray-700 space-y-1 text-sm">
-                  <li>Empresas de servicios públicos</li>
-                  <li>Entidades ambientales</li>
-                  <li>Empresas de gestión de residuos</li>
-                  <li>Laboratorios de control</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        )}
       </div>
     </div>
   );
