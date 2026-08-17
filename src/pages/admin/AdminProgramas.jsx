@@ -15,7 +15,7 @@ const AdminProgramas = () => {
   // Función para obtener los programas
   const fetchProgramas = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/programas');
+      const response = await fetch('https://api.univertec.org/api/programas');
       if (!response.ok) throw new Error('Error al obtener los programas');
       
       const result = await response.json();
@@ -43,8 +43,8 @@ const AdminProgramas = () => {
     e.preventDefault();
     try {
       const url = programaEditando 
-        ? `http://localhost:5001/api/programas/${programaEditando._id}` 
-        : 'http://localhost:5001/api/programas';
+        ? `https://api.univertec.org/api/programas/${programaEditando._id}` 
+        : 'https://api.univertec.org/api/programas';
       const method = programaEditando ? 'PUT' : 'POST';
 
       const token = localStorage.getItem('adminToken');
@@ -97,7 +97,7 @@ const AdminProgramas = () => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este programa?")) {
       try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch(`http://localhost:5001/api/programas/${id}`, {
+        const response = await fetch(`https://api.univertec.org/api/programas/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

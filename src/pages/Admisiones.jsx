@@ -4,7 +4,7 @@ const Admisiones = () => {
   const [content, setContent] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:5001/api/content')
+    fetch('https://api.univertec.org/api/content')
       .then(res => res.json())
       .then(data => {
         if(data.success) setContent(data.data);

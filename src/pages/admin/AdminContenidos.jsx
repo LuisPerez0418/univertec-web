@@ -14,7 +14,7 @@ const AdminContenidos = () => {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/content');
+      const response = await fetch('https://api.univertec.org/api/content');
       if (response.ok) {
         const result = await response.json();
         if (result.success && result.data) {
@@ -44,7 +44,7 @@ const AdminContenidos = () => {
     setSavingStatus(prev => ({ ...prev, [seccion]: 'Guardando...' }));
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`http://localhost:5001/api/content/${seccion}`, {
+      const response = await fetch(`https://api.univertec.org/api/content/${seccion}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

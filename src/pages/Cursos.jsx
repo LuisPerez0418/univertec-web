@@ -17,7 +17,7 @@ const Cursos = () => {
   useEffect(() => {
     const fetchProgramas = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/programas');
+        const response = await fetch('https://api.univertec.org/api/programas');
         const data = await response.json();
         if (data.success) {
           const activos = data.data.filter(p => p.estado);

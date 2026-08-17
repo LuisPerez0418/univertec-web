@@ -16,7 +16,7 @@ const AdminProyectos = () => {
 
   const fetchProyectos = async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/proyectos');
+      const response = await fetch('https://api.univertec.org/api/proyectos');
       if (!response.ok) throw new Error('Error al obtener los proyectos');
       const result = await response.json();
       if (result.success) {
@@ -50,8 +50,8 @@ const AdminProyectos = () => {
     e.preventDefault();
     try {
       const url = proyectoEditando 
-        ? `http://localhost:5001/api/proyectos/${proyectoEditando._id}` 
-        : 'http://localhost:5001/api/proyectos';
+        ? `https://api.univertec.org/api/proyectos/${proyectoEditando._id}` 
+        : 'https://api.univertec.org/api/proyectos';
       const method = proyectoEditando ? 'PUT' : 'POST';
 
       const token = localStorage.getItem('adminToken');
@@ -114,7 +114,7 @@ const AdminProyectos = () => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este proyecto de la galería permanentemente?")) {
       try {
         const token = localStorage.getItem('adminToken');
-        const response = await fetch(`http://localhost:5001/api/proyectos/${id}`, {
+        const response = await fetch(`https://api.univertec.org/api/proyectos/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -284,7 +284,7 @@ const AdminProyectos = () => {
                     <div className="mt-2">
                       <span className="text-xs text-gray-500 mb-1 block">Imagen actual:</span>
                       <img 
-                        src={formData.imagenUrl.startsWith('http') ? formData.imagenUrl : `http://localhost:5001${formData.imagenUrl.startsWith('/uploads') ? formData.imagenUrl : ''}`}
+                        src={formData.imagenUrl.startsWith('http') ? formData.imagenUrl : `https://api.univertec.org${formData.imagenUrl.startsWith('/uploads') ? formData.imagenUrl : ''}`}
                         alt="Vista previa" 
                         className="h-20 w-auto object-cover rounded border border-gray-200"
                         onError={(e) => { e.target.style.display = 'none'; }}

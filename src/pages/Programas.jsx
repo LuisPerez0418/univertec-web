@@ -8,7 +8,7 @@ const Programas = () => {
   useEffect(() => {
     const fetchProgramas = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/programas');
+        const response = await fetch('https://api.univertec.org/api/programas');
         const data = await response.json();
         if (data.success) {
           // Filtrar solo los de tipo Técnico que estén activos

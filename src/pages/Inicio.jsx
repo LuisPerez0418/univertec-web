@@ -26,7 +26,7 @@ const Inicio = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/banners');
+        const response = await fetch('https://api.univertec.org/api/banners');
         if (response.ok) {
           const result = await response.json();
           if (result.success && result.data.length > 0) {
@@ -78,7 +78,7 @@ const Inicio = () => {
   useEffect(() => {
     const fetchProyectos = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/proyectos');
+        const response = await fetch('https://api.univertec.org/api/proyectos');
         if (response.ok) {
           const result = await response.json();
           if (result.success && result.data.length > 0) {
