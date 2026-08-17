@@ -12,7 +12,6 @@ import authRoutes from './routes/auth.routes.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/univertec';
 
 // Middlewares
@@ -32,29 +31,24 @@ app.use('/api/auth', authRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'ok', message: 'Backend is running' });
+  res.status(200).json({
+    status: 'ok',
+    message: 'Backend is running'
+  });
 });
 
-// Database connection and Server initialization
-const startServer = async () => {
-  try {
-    // Intentamos establecer la conexión con la base de datos
-    await mongoose.connect(MONGO_URI);
-    console.log('✅ Conexión exitosa a la base de datos MongoDB sincronizada.');
-    
-    // Si es exitoso, levantamos el servidor
-    app.listen(PORT, () => {
-      console.log(`🚀 Servidor corriendo de forma robusta en http://127.0.0.1:${PORT}`);
-    });
-  } catch (error) {
-    console.error('❌ Error crítico al conectar a MongoDB:', error.message);
-    console.log('⚠️ Iniciando servidor en modo de fallback (sin base de datos) para desarrollo...');
-    
-    // En caso de fallo, levantamos en modo de prueba/fallback
-    app.listen(PORT, () => {
-      console.log(`🚀 Servidor corriendo en http://127.0.0.1:${PORT} (Modo Fallback)`);
-    });
-  }
-};
+// Conexión a MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('✅ Conectado correctamente a MongoDB Atlas');
+  })
+  .catch((error) => {
+    console.error('❌ Error conectando a MongoDB:', error.message);
+  });
 
-startServer();
+// Iniciar servidor
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, () => {
+  console.log(` Servidor corriendo en el puerto ${PORT}`);
+});
