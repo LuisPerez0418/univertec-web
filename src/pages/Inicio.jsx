@@ -286,7 +286,8 @@ const Inicio = () => {
                 <p className="text-gray-200 text-sm line-clamp-2">{item.descripcion}</p>
               </div>
             </div>
-          ))}
+          );
+        })}
         </div>
       </section>
 
