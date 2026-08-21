@@ -1,32 +1,39 @@
+import Admin from '../models/Admin.js';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@univertec.org';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-
     console.log('--- LOGIN ATTEMPT ---');
-    console.log('Received Body:', req.body);
-    console.log('Expected Email:', adminEmail);
-    // Don't log expected password completely in prod, but for debugging we can log it or a masked version. Let's log it.
-    console.log('Expected Password:', adminPassword);
+    console.log('Received Email:', email);
 
-    if (email !== adminEmail || password !== adminPassword) {
-      console.log('Login Failed: Credentials mismatch.');
+    // 1. Verificar si el usuario existe en la base de datos
+    const admin = await Admin.findOne({ email });
+    if (!admin) {
+      console.log('Login Failed: Usuario no encontrado en la base de datos.');
       return res.status(401).json({ success: false, message: 'Credenciales inválidas' });
     }
-    console.log('Login Successful!');
 
+    // 2. Verificar la contraseña con bcrypt
+    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!isMatch) {
+      console.log('Login Failed: La contraseña no coincide (bcrypt mismatch).');
+      return res.status(401).json({ success: false, message: 'Credenciales inválidas' });
+    }
+
+    console.log('Login Successful para:', admin.email);
+
+    // 3. Generar el JWT
     const payload = {
       admin: {
-        id: 'static_admin_id'
+        id: admin._id
       }
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET || 'supersecreto_univertec_2026', {
-      expiresIn: '1h' // El token expira en 1 hora
+      expiresIn: '1h'
     });
 
     return res.status(200).json({ success: true, token });
