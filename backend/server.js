@@ -38,7 +38,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(MONGO_URI)
   .then(() => {
     console.log('✅ Conectado correctamente a MongoDB Atlas');
   })
