@@ -42,13 +42,16 @@ app.get('/api/health', (req, res) => {
 });
 
 // Conexión a MongoDB
-mongoose.connect(MONGO_URI)
-  .then(() => {
+const connectDB = async () => {
+  try {
+    await mongoose.connect(MONGO_URI);
     console.log('✅ Conectado correctamente a MongoDB Atlas');
-  })
-  .catch((error) => {
+  } catch (error) {
     console.error('❌ Error conectando a MongoDB:', error.message);
-  });
+    // El servidor Express no se detiene
+  }
+};
+connectDB();
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5001;
