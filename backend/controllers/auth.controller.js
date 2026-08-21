@@ -1,24 +1,19 @@
-import Admin from '../models/Admin.js';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const admin = await Admin.findOne({ email });
-    if (!admin) {
-      return res.status(401).json({ success: false, message: 'Credenciales inválidas' });
-    }
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@univertec.org';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
 
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) {
+    if (email !== adminEmail || password !== adminPassword) {
       return res.status(401).json({ success: false, message: 'Credenciales inválidas' });
     }
 
     const payload = {
       admin: {
-        id: admin._id
+        id: 'static_admin_id'
       }
     };
 

@@ -56,7 +56,7 @@ const AdminBanners = () => {
         : 'https://api.univertec.org/api/banners';
       const method = bannerEditando ? 'PUT' : 'POST';
 
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('tokenUnivertec');
       
       const payload = new FormData();
       payload.append('titulo', formData.titulo);
@@ -118,7 +118,7 @@ const AdminBanners = () => {
   const eliminarBanner = async (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este banner permanentemente?")) {
       try {
-        const token = localStorage.getItem('adminToken');
+        const token = sessionStorage.getItem('tokenUnivertec');
         const response = await fetch(`https://api.univertec.org/api/banners/${id}`, {
           method: 'DELETE',
           headers: {

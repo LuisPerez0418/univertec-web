@@ -23,7 +23,7 @@ const Login = () => {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        localStorage.setItem('adminToken', data.token);
+        sessionStorage.setItem('tokenUnivertec', data.token);
         navigate('/admin');
       } else {
         setError(data.message || 'Error al iniciar sesión');

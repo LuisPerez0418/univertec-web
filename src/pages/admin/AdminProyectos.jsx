@@ -11,7 +11,8 @@ const AdminProyectos = () => {
     fecha: '',
     activo: true,
     archivoImagen: null,
-    imagenUrl: ''
+    imagenUrl: '',
+    categoria: 'Negocios Verdes'
   });
 
   const fetchProyectos = async () => {
@@ -54,13 +55,14 @@ const AdminProyectos = () => {
         : 'https://api.univertec.org/api/proyectos';
       const method = proyectoEditando ? 'PUT' : 'POST';
 
-      const token = localStorage.getItem('adminToken');
+      const token = sessionStorage.getItem('tokenUnivertec');
       
       const payload = new FormData();
       payload.append('titulo', formData.titulo);
       payload.append('descripcion', formData.descripcion || '');
       payload.append('fecha', formData.fecha || '');
       payload.append('activo', formData.activo);
+      payload.append('categoria', formData.categoria);
       
       if (formData.archivoImagen) {
         payload.append('archivoImagen', formData.archivoImagen);
@@ -74,7 +76,11 @@ const AdminProyectos = () => {
         body: payload
       });
 
-      if (!response.ok) throw new Error(`Error al ${proyectoEditando ? 'actualizar' : 'crear'} el proyecto`);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Error del backend:', errorData);
+        throw new Error(`Error al ${proyectoEditando ? 'actualizar' : 'crear'} el proyecto`);
+      }
 
       cerrarModal();
       fetchProyectos();
@@ -92,7 +98,8 @@ const AdminProyectos = () => {
       fecha: proyecto.fecha ? new Date(proyecto.fecha).toISOString().split('T')[0] : '',
       activo: proyecto.activo !== undefined ? proyecto.activo : true,
       archivoImagen: null,
-      imagenUrl: proyecto.imagenUrl || ''
+      imagenUrl: proyecto.imagenUrl || '',
+      categoria: proyecto.categoria || 'Negocios Verdes'
     });
     setIsModalOpen(true);
   };
@@ -104,7 +111,8 @@ const AdminProyectos = () => {
       fecha: '',
       activo: true,
       archivoImagen: null,
-      imagenUrl: ''
+      imagenUrl: '',
+      categoria: 'Negocios Verdes'
     });
     setProyectoEditando(null);
     setIsModalOpen(false);
@@ -113,7 +121,7 @@ const AdminProyectos = () => {
   const eliminarProyecto = async (id) => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este proyecto de la galería permanentemente?")) {
       try {
-        const token = localStorage.getItem('adminToken');
+        const token = sessionStorage.getItem('tokenUnivertec');
         const response = await fetch(`https://api.univertec.org/api/proyectos/${id}`, {
           method: 'DELETE',
           headers: {

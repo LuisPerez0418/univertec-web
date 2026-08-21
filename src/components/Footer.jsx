@@ -131,7 +131,7 @@ const Footer = () => {
       {/* Franja Inferior (Copyright) */}
       <div className="max-w-7xl mx-auto border-t border-gray-700 mt-8 pt-8 flex flex-col items-center justify-center space-y-1 text-center text-xs sm:text-sm text-gray-400">
         <p>© 2026 Fundación Universal de Estudios Técnicos – UNIVERTEC. Todos los derechos reservados.</p>
-        <p className="text-sm text-gray-500 mt-2">Sitio desarrollado por TurtleZ</p>
+        <p className="text-sm text-gray-500 mt-2">Sitio desarrollado por <a href="https://turtlez.es/" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">turlez</a></p>
       </div>
     </footer>
   );

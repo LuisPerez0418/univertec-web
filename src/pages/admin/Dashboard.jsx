@@ -5,7 +5,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem('adminToken');
+    sessionStorage.removeItem('tokenUnivertec');
     navigate('/login');
   };
 
