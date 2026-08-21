@@ -17,7 +17,7 @@ const Cursos = () => {
   useEffect(() => {
     const fetchProgramas = async () => {
       try {
-        const response = await fetch('https://api.univertec.org/api/programas');
+        const response = await fetch(import.meta.env.VITE_API_URL + '/programas');
         const data = await response.json();
         if (data.success) {
           const activos = data.data.filter(p => p.estado);

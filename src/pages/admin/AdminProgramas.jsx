@@ -15,7 +15,7 @@ const AdminProgramas = () => {
   // Función para obtener los programas
   const fetchProgramas = async () => {
     try {
-      const response = await fetch('https://api.univertec.org/api/programas');
+      const response = await fetch(import.meta.env.VITE_API_URL + '/programas');
       if (!response.ok) throw new Error('Error al obtener los programas');
       
       const result = await response.json();
@@ -43,8 +43,8 @@ const AdminProgramas = () => {
     e.preventDefault();
     try {
       const url = programaEditando 
-        ? `https://api.univertec.org/api/programas/${programaEditando._id}` 
-        : 'https://api.univertec.org/api/programas';
+        ? `${import.meta.env.VITE_API_URL}/programas/${programaEditando._id}` 
+        : import.meta.env.VITE_API_URL + '/programas';
       const method = programaEditando ? 'PUT' : 'POST';
 
       const token = sessionStorage.getItem('tokenUnivertec');
@@ -97,7 +97,7 @@ const AdminProgramas = () => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este programa?")) {
       try {
         const token = sessionStorage.getItem('tokenUnivertec');
-        const response = await fetch(`https://api.univertec.org/api/programas/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/programas/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

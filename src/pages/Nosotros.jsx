@@ -5,7 +5,7 @@ const Nosotros = () => {
   const [content, setContent] = useState({});
 
   useEffect(() => {
-    fetch('https://api.univertec.org/api/content')
+    fetch(import.meta.env.VITE_API_URL + '/content')
       .then(res => res.json())
       .then(data => {
         if(data.success) setContent(data.data);

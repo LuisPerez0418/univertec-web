@@ -17,7 +17,7 @@ const AdminBanners = () => {
 
   const fetchBanners = async () => {
     try {
-      const response = await fetch('https://api.univertec.org/api/banners');
+      const response = await fetch(import.meta.env.VITE_API_URL + '/banners');
       if (!response.ok) throw new Error('Error al obtener los banners');
       const result = await response.json();
       if (result.success) {
@@ -52,8 +52,8 @@ const AdminBanners = () => {
     e.preventDefault();
     try {
       const url = bannerEditando 
-        ? `https://api.univertec.org/api/banners/${bannerEditando._id}` 
-        : 'https://api.univertec.org/api/banners';
+        ? `${import.meta.env.VITE_API_URL}/banners/${bannerEditando._id}` 
+        : import.meta.env.VITE_API_URL + '/banners';
       const method = bannerEditando ? 'PUT' : 'POST';
 
       const token = sessionStorage.getItem('tokenUnivertec');
@@ -119,7 +119,7 @@ const AdminBanners = () => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este banner permanentemente?")) {
       try {
         const token = sessionStorage.getItem('tokenUnivertec');
-        const response = await fetch(`https://api.univertec.org/api/banners/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/banners/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -180,7 +180,7 @@ const AdminBanners = () => {
                   <tr key={banner._id} className="hover:bg-gray-50 transition-colors">
                     <td className="p-4">
                       <img 
-                        src={banner.imagenUrl.startsWith('/uploads') ? `https://api.univertec.org${banner.imagenUrl}` : banner.imagenUrl} 
+                        src={banner.imagenUrl.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${banner.imagenUrl}` : banner.imagenUrl} 
                         alt={banner.titulo} 
                         className="w-16 h-10 object-cover rounded shadow-sm border border-gray-200"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Error'; }}
@@ -275,7 +275,7 @@ const AdminBanners = () => {
                     <div className="mt-2">
                       <span className="text-xs text-gray-500 mb-1 block">Imagen actual:</span>
                       <img 
-                        src={formData.imagenUrl.startsWith('http') ? formData.imagenUrl : `https://api.univertec.org${formData.imagenUrl.startsWith('/uploads') ? formData.imagenUrl : ''}`}
+                        src={formData.imagenUrl.startsWith('http') ? formData.imagenUrl : `${import.meta.env.VITE_BACKEND_URL}${formData.imagenUrl.startsWith('/uploads') ? formData.imagenUrl : ''}`}
                         alt="Vista previa" 
                         className="h-20 w-auto object-cover rounded border border-gray-200"
                         onError={(e) => { e.target.style.display = 'none'; }}

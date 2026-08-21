@@ -38,7 +38,7 @@ const AdminContenidos = () => {
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('https://api.univertec.org/api/content');
+      const response = await fetch(import.meta.env.VITE_API_URL + '/content');
       if (response.ok) {
         const result = await response.json();
         if (result.success && result.data) {
@@ -68,7 +68,7 @@ const AdminContenidos = () => {
     setSavingStatus(prev => ({ ...prev, [seccion]: 'Guardando...' }));
     try {
       const token = sessionStorage.getItem('tokenUnivertec');
-      const response = await fetch(`https://api.univertec.org/api/content/${seccion}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/content/${seccion}`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ const Inicio = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await fetch('https://api.univertec.org/api/banners');
+        const response = await fetch(import.meta.env.VITE_API_URL + '/banners');
         if (response.ok) {
           const result = await response.json();
           if (result.success && result.data.length > 0) {
@@ -78,7 +78,7 @@ const Inicio = () => {
   useEffect(() => {
     const fetchProyectos = async () => {
       try {
-        const response = await fetch('https://api.univertec.org/api/proyectos');
+        const response = await fetch(import.meta.env.VITE_API_URL + '/proyectos');
         if (response.ok) {
           const result = await response.json();
           if (result.success && result.data.length > 0) {
@@ -127,7 +127,7 @@ const Inicio = () => {
       <section className="relative w-full aspect-[4/3] sm:aspect-video lg:aspect-[21/9] bg-[#0b1727] overflow-hidden">
         {banners.map((slide, index) => {
           const imageUrl = slide.imagenUrl.startsWith('/uploads') 
-            ? `https://api.univertec.org${slide.imagenUrl}` 
+            ? `${import.meta.env.VITE_BACKEND_URL}${slide.imagenUrl}` 
             : slide.imagenUrl;
             
           return (
@@ -269,7 +269,7 @@ const Inicio = () => {
           {actividades.map((item) => {
             const imgSource = item.imagenUrl || item.imagen || '';
             const finalImageUrl = imgSource.startsWith('/uploads') 
-              ? `https://api.univertec.org${imgSource}` 
+              ? `${import.meta.env.VITE_BACKEND_URL}${imgSource}` 
               : imgSource;
 
             return (

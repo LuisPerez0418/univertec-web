@@ -15,7 +15,11 @@ const app = express();
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/univertec';
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://univertec.org', 'https://www.univertec.org', 'https://api.univertec.org'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
 app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);

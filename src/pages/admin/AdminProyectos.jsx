@@ -17,7 +17,7 @@ const AdminProyectos = () => {
 
   const fetchProyectos = async () => {
     try {
-      const response = await fetch('https://api.univertec.org/api/proyectos');
+      const response = await fetch(import.meta.env.VITE_API_URL + '/proyectos');
       if (!response.ok) throw new Error('Error al obtener los proyectos');
       const result = await response.json();
       if (result.success) {
@@ -51,8 +51,8 @@ const AdminProyectos = () => {
     e.preventDefault();
     try {
       const url = proyectoEditando 
-        ? `https://api.univertec.org/api/proyectos/${proyectoEditando._id}` 
-        : 'https://api.univertec.org/api/proyectos';
+        ? `${import.meta.env.VITE_API_URL}/proyectos/${proyectoEditando._id}` 
+        : import.meta.env.VITE_API_URL + '/proyectos';
       const method = proyectoEditando ? 'PUT' : 'POST';
 
       const token = sessionStorage.getItem('tokenUnivertec');
@@ -122,7 +122,7 @@ const AdminProyectos = () => {
     if (window.confirm("¿Estás seguro de que deseas eliminar este proyecto de la galería permanentemente?")) {
       try {
         const token = sessionStorage.getItem('tokenUnivertec');
-        const response = await fetch(`https://api.univertec.org/api/proyectos/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/proyectos/${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -182,7 +182,7 @@ const AdminProyectos = () => {
                   <tr key={proyecto._id} className="hover:bg-gray-50 transition-colors">
                     <td className="p-4">
                       <img 
-                        src={proyecto.imagenUrl.startsWith('/uploads') ? `https://api.univertec.org${proyecto.imagenUrl}` : proyecto.imagenUrl} 
+                        src={proyecto.imagenUrl.startsWith('/uploads') ? `${import.meta.env.VITE_BACKEND_URL}${proyecto.imagenUrl}` : proyecto.imagenUrl} 
                         alt={proyecto.titulo} 
                         className="w-16 h-12 object-cover rounded shadow-sm border border-gray-200"
                         onError={(e) => { e.target.src = 'https://via.placeholder.com/150?text=Error'; }}
@@ -292,7 +292,7 @@ const AdminProyectos = () => {
                     <div className="mt-2">
                       <span className="text-xs text-gray-500 mb-1 block">Imagen actual:</span>
                       <img 
-                        src={formData.imagenUrl.startsWith('http') ? formData.imagenUrl : `https://api.univertec.org${formData.imagenUrl.startsWith('/uploads') ? formData.imagenUrl : ''}`}
+                        src={formData.imagenUrl.startsWith('http') ? formData.imagenUrl : `${import.meta.env.VITE_BACKEND_URL}${formData.imagenUrl.startsWith('/uploads') ? formData.imagenUrl : ''}`}
                         alt="Vista previa" 
                         className="h-20 w-auto object-cover rounded border border-gray-200"
                         onError={(e) => { e.target.style.display = 'none'; }}
